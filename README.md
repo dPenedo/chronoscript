@@ -5,7 +5,7 @@ Chronostalgic is a retro-styled stopwatch application built with vanilla JavaScr
 ## Usage
 It's simple:
 - The "Start" button has three modes:
-    1. "Start", to begin the stopwatch
-    2. "Stop", to stop the stopwatch
-    3. "Pause", to pause the stopwatch
+        1. "Start", to begin the stopwatch
+        2. "Stop", to stop the stopwatch
+        3. "Pause", to pause the stopwatch
 - The "Reset" button reset the stopwatch to zero.
