@@ -6,12 +6,12 @@ document.addEventListener('DOMContentLoaded', function () {
     let isRunning = false;
     let intervalId;
 
-    const millisecondsDisplay = document.querySelector('.time-container__millisec');
-    const secondsDisplay = document.querySelector('.time-container__sec');
-    const minutesDisplay = document.querySelector('.time-container__min');
-    const hoursDisplay = document.querySelector('.time-container__hours');
-    const startButton = document.querySelector('.buttons-container__play-pause');
-    const resetButton = document.querySelector('.buttons-container__reset');
+    const millisecondsDisplay = document.querySelector('.clock__millisec');
+    const secondsDisplay = document.querySelector('.clock__sec');
+    const minutesDisplay = document.querySelector('.clock__min');
+    const hoursDisplay = document.querySelector('.clock__hours');
+    const startButton = document.querySelector('.button_play-pause');
+    const resetButton = document.querySelector('.button_reset');
 
     startButton.addEventListener('click', toggleChronometer);
     resetButton.addEventListener('click', reset);
