@@ -1,15 +1,46 @@
+:root {
+    --bg: #1a1e23;
+    --green: #61ff8b;
+    --purple: #a67bd8;
+    --yellow: #dce1ad;
+}
+
 body {
-    padding: 2vh;
     font-family: 'Kode Mono', sans-serif;
     background-color: #1a1e23;
-    color: #61ff8b;
+    color: var(--green);
 }
 
 .main-title {
     margin-top: 1em;
     display: flex;
     justify-content: center;
-    font-size: 4em;
+    font-size: 2em;
+}
+
+.navbar {
+    display: flex;
+    border-bottom: 2px solid #a67db8;
+    padding: 0;
+    margin-left: -1vh;
+    margin-right: -1vh;
+}
+
+.navbar__link {
+    text-decoration: none;
+    color: #a67db8;
+    margin-left: 8vh;
+    font-weight: 600;
+    font-size: 1.1em;
+    padding: 0.5em;
+    transition: all 0.5s ease;
+}
+
+.navbar__link:hover {
+    background-color: #a67db8;
+    color: #1a1e23;
+    border-color: #61ff8b;
+    cursor: pointer;
 }
 
 .clock__container {
@@ -18,17 +49,86 @@ body {
     margin-right: auto;
     margin-top: 0.5em;
     margin-bottom: 0.5em;
-    padding: 6vh;
+    padding: 2vh;
     border: 2px solid #a67db8;
-    font-size: 4em;
+    font-size: 2em;
     border-radius: 5px;
     max-width: fit-content;
     max-height: fit-content;
 }
 
+.clock__title {
+    display: flex;
+    justify-content: center;
+    color: #dce1a5;
+}
+
 .clock__separator {
     margin-left: 0.2em;
     margin-right: 0.2em;
+}
+
+.countries {
+    display: flex;
+    justify-content: center;
+}
+
+.countries__label {
+    font-size: 1.5em;
+}
+
+.countries__select {
+    background-color: #dce1a5;
+    color: #1a1e23;
+    border-radius: 5px;
+    border: 2px solid #a67db8;
+}
+
+.countries__option {
+    background-color: #dce1a5;
+}
+
+.accordion {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+}
+.accordion__button {
+    font-family: 'Kode Mono', sans-serif;
+    font-size: 1.2em;
+    background-color: #dce1a5;
+    width: 15em;
+    max-width: 16em;
+    margin-left: auto;
+    margin-right: auto;
+    color: #1a1e23;
+    border-radius: 5px;
+    border: 2px solid #a67db8;
+    cursor: pointer;
+}
+
+.accordion__content {
+    display: none;
+}
+
+.accordion__content.active {
+    display: flex;
+    justify-content: center;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* Estilos para cada opción del select */
+.countries__option {
+    background-color: #dce1a5;
+    width: 14em;
+}
+
+.countries__option:hover {
+    background-color: #61ff8b;
+    color: #1a1e23;
+    font-weight: 600;
+    cursor: pointer;
 }
 
 .buttons-container {
@@ -42,7 +142,7 @@ body {
     border-color: #a67db8;
     font-family: 'Kode Mono';
     font-weight: 900;
-    font-size: 2em;
+    font-size: 1em;
     width: 8em;
     border-radius: 5px;
     padding: 0.5em;
@@ -61,7 +161,7 @@ body {
 
 @media (min-width: 1200px) {
     .main-title {
-        font-size: 2em;
+        font-size: 3em;
     }
 
     .clock__container {
@@ -72,6 +172,6 @@ body {
     }
 
     .button {
-        font-size: 1em;
+        font-size: 1.5em;
     }
 }

@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <title>Chronostalgic - World times</title>
+        <script defer src="world-times.js"></script>
+
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Kode+Mono:wght@400..700&display=swap"
+            rel="stylesheet"
+        />
+
+        <!-- favicons -->
+        <link rel="icon" href="img/favicon.ico" type="image/x-icon" />
+        <link
+            rel="apple-touch-icon"
+            sizes="180x180"
+            href="/img/apple-touch-icon.png"
+        />
+        <link
+            rel="icon"
+            type="image/png"
+            sizes="192x192"
+            href="/img/android-chrome-192x192.png"
+        />
+
+        <link rel="stylesheet" href="styles.css" />
+    </head>
+
+    <body>
+        <nav class="navbar">
+            <a class="navbar__link" href="index.html">Chronometer</a>
+            <a class="navbar__link" href="world-times.html">Countdown</a>
+        </nav>
+        <h1 class="main-title">World Times</h1>
+        <div class="clock">
+            <h1 class="clock__title">Country's Name</h1>
+            <div class="clock__container">
+                <div class="clock__hours clock__hours-main">00</div>
+                <div class="clock__separator">:</div>
+                <div class="clock__min clock__min-main">00</div>
+                <div class="clock__separator">:</div>
+                <div class="clock__sec clock__sec-main">00</div>
+            </div>
+        </div>
+        <div class="clock second-clock">
+            <h1 class="clock__title">Second Country's Name</h1>
+            <div class="clock__container">
+                <div class="clock__hours second-clock__hours">00</div>
+                <div class="clock__separator">:</div>
+                <div class="clock__min second-clock__min">00</div>
+                <div class="clock__separator">:</div>
+                <div class="clock__sec second-clock__sec">00</div>
+            </div>
+        </div>
+        <div class="countries">
+            <form class="countries__form" method="get">
+                <label class="countries__label">Select a country</label>
+                <select
+                    class="countries__select"
+                    name="countries"
+                    id="countries"
+                >
+                    <option class="countries__option" value="Argentina">
+                        Argentina
+                    </option>
+                    <option class="countries__option" value="Uruguay">
+                        Uruguay
+                    </option>
+                    <option class="countries__option" value="Paraguay">
+                        Paraguay
+                    </option>
+                    <option class="countries__option" value="EEUU">EEUU</option>
+                </select>
+            </form>
+        </div>
+        <div class="accordion">
+            <button class="accordion__button">Select a country ⬇</button>
+            <div class="accordion__content">
+                <form class="countries__form" method="get">
+                    <select
+                        class="countries__select"
+                        name="countries"
+                        id="countries"
+                        size="5"
+                    >
+                        <option class="countries__option" value="Argentina">
+                            Argentina
+                        </option>
+                        <option class="countries__option" value="Uruguay">
+                            Uruguay
+                        </option>
+                        <option class="countries__option" value="Paraguay">
+                            Paraguay
+                        </option>
+                        <option class="countries__option" value="EEUU">
+                            EEUU
+                        </option>
+                    </select>
+                </form>
+            </div>
+        </div>
+    </body>
+</html>
