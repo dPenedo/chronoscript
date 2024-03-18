@@ -75,10 +75,22 @@ setInterval(updateTime, 1000);
 
 // Get the time for the first time
 updateTime();
+
 const citiesButton = document.querySelector('.cities__button');
 const citiesContent = document.querySelector('.cities__content');
 
-citiesButton.addEventListener('click', function () {
+function closeAccordion() {
+    citiesContent.classList.remove('active');
+}
+
+citiesButton.addEventListener('click', function (event) {
     citiesContent.classList.toggle('active');
+    event.stopPropagation();
 });
+document.addEventListener('click', function (event) {
+    const target = event.target;
+    if (!citiesContent.contains(target) && !citiesButton.contains(target)) {
+        closeAccordion();
+    }
+})
 
