@@ -1,24 +1,40 @@
 function updateTime() {
-    const now = new Date();
-    const hours = String(now.getHours()).padStart(2, '0');
-    const minutes = String(now.getMinutes()).padStart(2, '0');
-    const seconds = String(now.getSeconds()).padStart(2, '0');
 
-    const clockHours = document.querySelector('.clock__hours-main');
-    const clockMinutes = document.querySelector('.clock__min-main');
-    const clockSeconds = document.querySelector('.clock__sec-main');
 
+    const firstClockHours = document.querySelector('.clock__hours-main');
+    const firstClockMinutes = document.querySelector('.clock__min-main');
+    const firstClockSeconds = document.querySelector('.clock__sec-main');
     const secondClockHours = document.querySelector('.second-clock__hours');
     const secondclockMinutes = document.querySelector('.second-clock__min');
     const secondclockSeconds = document.querySelector('.second-clock__sec');
 
-    clockSeconds.textContent = seconds;
-    clockMinutes.textContent = minutes;
-    clockHours.textContent = hours;
+    // First clock logic
+    const now = new Date();
+    const firstHours = String(now.getHours()).padStart(2, '0');
+    const firstMinutes = String(now.getMinutes()).padStart(2, '0');
+    const firstSeconds = String(now.getSeconds()).padStart(2, '0');
+    firstClockSeconds.textContent = firstSeconds;
+    firstClockMinutes.textContent = firstMinutes;
+    firstClockHours.textContent = firstHours;
 
-    secondClockHours.textContent = hours;
-    secondclockMinutes.textContent = minutes;
-    secondclockSeconds.textContent = seconds;
+    // Second clock logic
+
+
+    const secondTimestamp = 1710767984;
+    const secondMilliseconds = secondTimestamp * 1000;
+    const secondDateObject = new Date(secondMilliseconds);
+    const secondHours = ('0' + secondDateObject.getHours()).slice(-2);
+    const secondMinutes = ('0' + secondDateObject.getMinutes()).slice(-2);
+    const secondSeconds = ('0' + secondDateObject.getSeconds()).slice(-2);
+
+
+
+
+    secondClockHours.textContent = secondHours;
+    secondclockMinutes.textContent = secondMinutes;
+    secondclockSeconds.textContent = secondSeconds;
+
+
 }
 
 setInterval(updateTime, 10);
