@@ -68,32 +68,27 @@ body {
     margin-right: 0.2em;
 }
 
-.countries {
-    display: flex;
-    justify-content: center;
-}
+/* 
 
-.countries__label {
-    font-size: 1.5em;
-}
 
-.countries__select {
+.cities__select {
     background-color: #dce1a5;
     color: #1a1e23;
     border-radius: 5px;
     border: 2px solid #a67db8;
 }
 
-.countries__option {
+.cities__option {
     background-color: #dce1a5;
-}
+} */
 
-.accordion {
+.cities {
     display: flex;
     justify-content: center;
     flex-direction: column;
 }
-.accordion__button {
+
+.cities__button {
     font-family: 'Kode Mono', sans-serif;
     font-size: 1.2em;
     background-color: #dce1a5;
@@ -107,24 +102,30 @@ body {
     cursor: pointer;
 }
 
-.accordion__content {
+.cities__content {
     display: none;
 }
 
-.accordion__content.active {
+.cities__content.active {
     display: flex;
     justify-content: center;
     margin-left: auto;
     margin-right: auto;
 }
 
-/* Estilos para cada opción del select */
-.countries__option {
+.cities__select {
+    display: flex;
+    justify-content: center;
+    font-family: 'Kode Mono', sans-serif;
+    font-size: 1.2em
+}
+
+.cities__option {
     background-color: #dce1a5;
     width: 14em;
 }
 
-.countries__option:hover {
+.cities__option:hover {
     background-color: #61ff8b;
     color: #1a1e23;
     font-weight: 600;
