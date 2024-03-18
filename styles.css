@@ -1,5 +1,6 @@
 :root {
     --bg: #1a1e23;
+    --white: #ffffff;
     --green: #61ff8b;
     --purple: #a67bd8;
     --yellow: #dce1ad;
@@ -7,7 +8,7 @@
 
 body {
     font-family: 'Kode Mono', sans-serif;
-    background-color: #1a1e23;
+    background-color: var(--bg);
     color: var(--green);
 }
 
@@ -20,7 +21,8 @@ body {
 
 .navbar {
     display: flex;
-    border-bottom: 2px solid #a67db8;
+    justify-content: center;
+    border-bottom: 2px solid var(--purple);
     padding: 0;
     margin-left: -1vh;
     margin-right: -1vh;
@@ -28,7 +30,7 @@ body {
 
 .navbar__link {
     text-decoration: none;
-    color: #a67db8;
+    color: var(--purple);
     margin-left: 8vh;
     font-weight: 600;
     font-size: 1.1em;
@@ -37,9 +39,9 @@ body {
 }
 
 .navbar__link:hover {
-    background-color: #a67db8;
-    color: #1a1e23;
-    border-color: #61ff8b;
+    background-color: var(--purple);
+    color: var(--bg);
+    border-color: var(--green);
     cursor: pointer;
 }
 
@@ -50,7 +52,7 @@ body {
     margin-top: 0.5em;
     margin-bottom: 0.5em;
     padding: 2vh;
-    border: 2px solid #a67db8;
+    border: 2px solid var(--purple);
     font-size: 2em;
     border-radius: 5px;
     max-width: max-content;
@@ -60,7 +62,7 @@ body {
 .clock__title {
     display: flex;
     justify-content: center;
-    color: #dce1a5;
+    color: var(--yellow);
 }
 
 .clock__separator {
@@ -68,18 +70,18 @@ body {
     margin-right: 0.2em;
 }
 
-/* 
+/*
 
 
 .cities__select {
-    background-color: #dce1a5;
-    color: #1a1e23;
+    background-color: var(--yellow);
+    color: var(--bg);
     border-radius: 5px;
-    border: 2px solid #a67db8;
+    border: 2px solid var(--purple);
 }
 
 .cities__option {
-    background-color: #dce1a5;
+    background-color: var(--yellow);
 } */
 
 .cities {
@@ -91,14 +93,14 @@ body {
 .cities__button {
     font-family: 'Kode Mono', sans-serif;
     font-size: 1.2em;
-    background-color: #dce1a5;
+    background-color: var(--yellow);
     width: 15em;
     max-width: 16em;
     margin-left: auto;
     margin-right: auto;
-    color: #1a1e23;
+    color: var(--bg);
     border-radius: 5px;
-    border: 2px solid #a67db8;
+    border: 2px solid var(--purple);
     cursor: pointer;
 }
 
@@ -117,19 +119,34 @@ body {
     display: flex;
     justify-content: center;
     font-family: 'Kode Mono', sans-serif;
-    font-size: 1.2em
+    font-size: 1.2em;
 }
 
 .cities__option {
-    background-color: #dce1a5;
+    background-color: var(--yellow);
     width: 14em;
 }
 
 .cities__option:hover {
-    background-color: #61ff8b;
-    color: #1a1e23;
+    background-color: var(--green);
+    color: var(--bg);
     font-weight: 600;
     cursor: pointer;
+}
+
+.set-timer {
+    display: flex;
+    justify-content: center;
+}
+
+.set-timer__form {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.set-timer__input {
+    background-color: var(--yellow);
 }
 
 .buttons-container {
@@ -138,9 +155,9 @@ body {
 }
 
 .button {
-    background-color: #61ff8b;
-    color: #1a1e23;
-    border-color: #a67db8;
+    background-color: var(--green);
+    color: var(--bg);
+    border-color: var(--purple);
     font-family: 'Kode Mono';
     font-weight: 900;
     font-size: 1em;
@@ -154,9 +171,9 @@ body {
 }
 
 .button:hover {
-    background-color: #a67db8;
-    color: #ffffff;
-    border-color: #61ff8b;
+    background-color: var(--purple);
+    color: var(--white);
+    border-color: var(--green);
     cursor: pointer;
 }
 

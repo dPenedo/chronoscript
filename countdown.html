@@ -3,7 +3,7 @@
 
 <head>
     <title>Chronostalgic - Countdown</title>
-    <script src="counter.js"></script>
+    <script defer src="countdown.js"></script>
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -34,10 +34,26 @@
             <div class="clock__min">00</div>
             <div class="clock__separator">:</div>
             <div class="clock__sec">00</div>
-            <div class="clock__separator">:</div>
-            <div class="clock__millisec">00</div>
         </div>
     </div>
+
+    <div class="set-timer">
+        <form class="set-timer__form" method="get">
+            <label class="set-timer__label" for="timeInput">Enter hours:</label>
+            <input class="set-timer__input" max="24" type="number" id="timeInput" name="timeInput" placeholder="Hours"
+                required>
+            <label class="set-timer__label" for="timeInput">Enter minutes:</label>
+            <input class="set-timer__input" max="60" type="number" id="timeInput" name="timeInput" placeholder="Minutes"
+                required>
+            <label class="set-timer__label" max="60" for="timeInput">Enter seconds:</label>
+            <input class="set-timer__input" type="number" id="timeInput" name="timeInput" placeholder="Seconds"
+                required>
+
+        </form>
+    </div>
+
+
+
 
     <div class="buttons-container">
         <button class="button button_play-pause">Start</button>
