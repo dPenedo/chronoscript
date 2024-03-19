@@ -120,6 +120,7 @@ body {
     justify-content: center;
     font-family: 'Kode Mono', sans-serif;
     font-size: 1.2em;
+    width: 14em;
 }
 
 .cities__option {
