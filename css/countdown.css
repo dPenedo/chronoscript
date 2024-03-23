@@ -1,0 +1,14 @@
+.set-timer {
+    display: flex;
+    justify-content: center;
+}
+
+.set-timer__form {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.set-timer__input {
+    background-color: var(--yellow);
+}

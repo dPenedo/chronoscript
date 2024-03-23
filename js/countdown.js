@@ -1,21 +1,26 @@
-let milliseconds = 0;
 let seconds = 0;
 let minutes = 0;
 let hours = 0;
 let isRunning = false;
 let intervalId;
 
-const millisecondsDisplay = document.querySelector('.clock__millisec');
 const secondsDisplay = document.querySelector('.clock__sec');
 const minutesDisplay = document.querySelector('.clock__min');
 const hoursDisplay = document.querySelector('.clock__hours');
 const startButton = document.querySelector('.button_play-pause');
 const resetButton = document.querySelector('.button_reset');
 
+
 const timeInput = document.querySelector('#timeInput');
 
 startButton.addEventListener('click', toggleChronometer);
 resetButton.addEventListener('click', reset);
+
+// TODO: representar los inputs
+hoursTimerInput.addEventListener('input',);
+minTimerInput.addEventListener();
+
+
 
 
 

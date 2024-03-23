@@ -9,31 +9,25 @@ const secondClockHours = document.querySelector('.second-clock__hours');
 const secondclockMinutes = document.querySelector('.second-clock__min');
 const secondclockSeconds = document.querySelector('.second-clock__sec');
 
-
 // Create forms options
 fetch('http://worldtimeapi.org/api/timezone/')
-    .then(response => response.json())
-    .then(data => {
+    .then((response) => response.json())
+    .then((data) => {
         for (const place in data) {
             if (Object.hasOwnProperty.call(data, place)) {
                 const option = document.createElement('option');
                 option.value = data[place];
-                option.className = "cities__option";
+                option.className = 'cities__option';
                 option.textContent = data[place];
                 citySelect.appendChild(option);
-
             }
         }
     })
-    .catch(error => {
-        console.log("Error: " + error);
+    .catch((error) => {
+        console.log('Error: ' + error);
     });
 
-
 function updateTime() {
-
-
-
     // First clock logic
     const now = new Date();
     const firstHours = String(now.getHours()).padStart(2, '0');
@@ -43,14 +37,12 @@ function updateTime() {
     firstClockMinutes.textContent = firstMinutes;
     firstClockHours.textContent = firstHours;
 
-
-
     selectedCity = citySelect.value;
-    if (selectedCity != "") {
+    if (selectedCity != '') {
         selectedCityName.textContent = selectedCity;
         fetch(`http://worldtimeapi.org/api/timezone/${selectedCity}`)
-            .then(response => response.json())
-            .then(data => {
+            .then((response) => response.json())
+            .then((data) => {
                 let datetimeString = data.datetime;
 
                 // Extract timezone offset
@@ -61,14 +53,10 @@ function updateTime() {
                 secondclockMinutes.textContent = secondMinutes;
                 secondclockSeconds.textContent = secondSeconds;
             })
-            .catch(error => {
-                console.log("Error: " + error);
+            .catch((error) => {
+                console.log('Error: ' + error);
             });
-
-
     }
-
-
 }
 
 setInterval(updateTime, 1000);
@@ -92,5 +80,4 @@ document.addEventListener('click', function (event) {
     if (!citiesContent.contains(target) && !citiesButton.contains(target)) {
         closeAccordion();
     }
-})
-
+});
