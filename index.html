@@ -1,49 +1,55 @@
 <!doctype html>
 <html lang="en">
+    <head>
+        <title>Chronostalgic - Stopwatch</title>
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Kode+Mono:wght@400..700&display=swap"
+            rel="stylesheet"
+        />
+        <!-- favicons -->
+        <link rel="icon" href="img/favicon.ico" type="image/x-icon" />
+        <link
+            rel="apple-touch-icon"
+            sizes="180x180"
+            href="/img/apple-touch-icon.png"
+        />
+        <link
+            rel="icon"
+            type="image/png"
+            sizes="192x192"
+            href="/img/android-chrome-192x192.png"
+        />
+        <script defer src="js/chronometer.js"></script>
+        <link rel="stylesheet" href="css/styles.css" />
+    </head>
 
-<head>
-    <title>Chronostalgic - Stopwatch</title>
+    <body>
+        <!-- ========== Navbar   ========== -->
+        <nav class="navbar">
+            <a class="navbar__link" href="world-times.html">World-Times</a>
+            <a class="navbar__link" href="countdown.html">Countdown</a>
+        </nav>
+        <!-- ========== Navbar 🠩 ========== -->
 
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Kode+Mono:wght@400..700&display=swap" rel="stylesheet" />
-
-    <!-- favicons -->
-    <link rel="icon" href="img/favicon.ico" type="image/x-icon" />
-    <link rel="apple-touch-icon" sizes="180x180" href="/img/apple-touch-icon.png" />
-    <link rel="icon" type="image/png" sizes="192x192" href="/img/android-chrome-192x192.png" />
-
-    <script defer src="js/chronometer.js"></script>
-    <link rel="stylesheet" href="css/styles.css" />
-</head>
-
-<body>
-
-    <!-- ========== Navbar   ========== -->
-    <nav class="navbar">
-        <a class="navbar__link" href="world-times.html">World-Times</a>
-        <a class="navbar__link" href="countdown.html">Countdown</a>
-    </nav>
-    <!-- ========== Navbar 🠩 ========== -->
-
-    <h1 class="main-title">CHRONOSTALGIC</h1>
-    <div class="clock">
-        <div class="clock__container">
-            <div class="clock__hours">00</div>
-            <div class="clock__separator">:</div>
-            <div class="clock__min">00</div>
-            <div class="clock__separator">:</div>
-            <div class="clock__sec">00</div>
-            <div class="clock__separator">:</div>
-            <div class="clock__millisec">00</div>
+        <h1 class="main-title">CHRONOMETER</h1>
+        <div class="clock">
+            <div class="clock__container">
+                <div class="clock__hours">00</div>
+                <div class="clock__separator">:</div>
+                <div class="clock__min">00</div>
+                <div class="clock__separator">:</div>
+                <div class="clock__sec">00</div>
+                <div class="clock__separator">:</div>
+                <div class="clock__millisec">00</div>
+            </div>
         </div>
-    </div>
 
-    <div class="buttons-container">
-        <button class="button button_play-pause">Start</button>
+        <div class="buttons__container">
+            <button class="button button__play-pause">Start</button>
 
-        <button class="button button_reset">Reset</button>
-    </div>
-</body>
-
+            <button class="button button__reset">Reset</button>
+        </div>
+    </body>
 </html>

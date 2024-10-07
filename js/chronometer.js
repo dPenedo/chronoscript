@@ -1,16 +1,16 @@
+const millisecondsDisplay = document.querySelector('.clock__millisec');
+const secondsDisplay = document.querySelector('.clock__sec');
+const minutesDisplay = document.querySelector('.clock__min');
+const hoursDisplay = document.querySelector('.clock__hours');
+const startButton = document.querySelector('.button__play-pause');
+const resetButton = document.querySelector('.button__reset');
+
 let milliseconds = 0;
 let seconds = 0;
 let minutes = 0;
 let hours = 0;
 let isRunning = false;
 let intervalId;
-
-const millisecondsDisplay = document.querySelector('.clock__millisec');
-const secondsDisplay = document.querySelector('.clock__sec');
-const minutesDisplay = document.querySelector('.clock__min');
-const hoursDisplay = document.querySelector('.clock__hours');
-const startButton = document.querySelector('.button_play-pause');
-const resetButton = document.querySelector('.button_reset');
 
 startButton.addEventListener('click', toggleChronometer);
 resetButton.addEventListener('click', reset);
@@ -19,11 +19,11 @@ function toggleChronometer() {
     if (!isRunning) {
         intervalId = setInterval(count, 10);
         isRunning = true;
-        document.querySelector('button').innerHTML = "Pause";
+        document.querySelector('button').innerHTML = 'Pause';
     } else {
         clearInterval(intervalId);
         isRunning = false;
-        document.querySelector('button').innerHTML = "Play";
+        document.querySelector('button').innerHTML = 'Play';
     }
 }
 function count() {
@@ -52,19 +52,16 @@ function updateDisplay() {
     secondsDisplay.innerHTML = formatTime(seconds);
     minutesDisplay.innerHTML = formatTime(minutes);
     hoursDisplay.innerHTML = formatTime(hours);
-
 }
 function formatTime(time) {
-    return time < 10 ? "0" + time : time;
+    return time < 10 ? '0' + time : time;
 }
-
-
 
 function reset() {
     clearInterval(intervalId);
     isRunning = false;
     milliseconds = seconds = minutes = hours = 0;
-    startButton.innerHTML = "Start";
+    startButton.innerHTML = 'Start';
     updateDisplay();
     if (isRunning) {
         toggleChronometer();
