@@ -1,4 +1,4 @@
-import { formatTime, timeIsUp, timeIsInvalid, decrementTime } from './utils.js';
+import { formatTime, timeIsUp, timeIsInvalid, decreaseTime } from './utils.js';
 
 const secondsDisplay = document.querySelector('.clock__sec');
 const minutesDisplay = document.querySelector('.clock__min');
@@ -65,7 +65,7 @@ function countdown() {
         clearInputFields();
         return;
     }
-    const updatedTime = decrementTime({ seconds, minutes, hours });
+    const updatedTime = decreaseTime({ seconds, minutes, hours });
     seconds = updatedTime.seconds;
     minutes = updatedTime.minutes;
     hours = updatedTime.hours;

@@ -1,3 +1,5 @@
+import { formatTime, increaseTime } from './utils.js';
+
 const millisecondsDisplay = document.querySelector('.clock__millisec');
 const secondsDisplay = document.querySelector('.clock__sec');
 const minutesDisplay = document.querySelector('.clock__min');
@@ -33,28 +35,17 @@ function count() {
     minutesDisplay.innerHTML = formatTime(minutes);
     hoursDisplay.innerHTML = formatTime(hours);
 
-    // if (counter % 10 === 0) {
-    //     alert(`Count is now ${counter}`);
-    // }
-    if (milliseconds % 100 === 0 && milliseconds !== 0) {
-        milliseconds = 0;
-        seconds++;
-    } else if (seconds % 60 === 0 && seconds !== 0) {
-        seconds = 0;
-        minutes++;
-    } else if (minutes % 60 === 0 && minutes !== 0) {
-        minutes = 0;
-        hour++;
-    }
+    const updatedTime = increaseTime({ milliseconds, seconds, minutes, hours });
+    milliseconds = updatedTime.milliseconds;
+    seconds = updatedTime.seconds;
+    minutes = updatedTime.minutes;
+    hours = updatedTime.hours;
 }
 function updateDisplay() {
     millisecondsDisplay.innerHTML = formatTime(milliseconds);
     secondsDisplay.innerHTML = formatTime(seconds);
     minutesDisplay.innerHTML = formatTime(minutes);
     hoursDisplay.innerHTML = formatTime(hours);
-}
-function formatTime(time) {
-    return time < 10 ? '0' + time : time;
 }
 
 function reset() {
