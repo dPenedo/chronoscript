@@ -1,3 +1,5 @@
+import { formatTime, timeIsUp, timeIsInvalid, decrementTime } from './utils.js';
+
 const secondsDisplay = document.querySelector('.clock__sec');
 const minutesDisplay = document.querySelector('.clock__min');
 const hoursDisplay = document.querySelector('.clock__hours');
@@ -15,68 +17,59 @@ let isRunning = false;
 const intervalTime = 1000; // 1000 ms = 1s
 let intervalId;
 
-const timeInput = document.querySelector('#timeInput');
+const clearInputFields = () => {
+    inputHours.value = '';
+    inputMinutes.value = '';
+    inputSeconds.value = '';
+};
 
-startButton.addEventListener('click', toggleChronometer);
-resetButton.addEventListener('click', reset);
-
-// Representar los inputs
-inputHours.addEventListener('change', (event) => {
-    hours = event.target.value;
+function updateTimeFromInput() {
+    hours = parseInt(inputHours.value) || 0;
+    minutes = parseInt(inputMinutes.value) || 0;
+    seconds = parseInt(inputSeconds.value) || 0;
     updateDisplay();
-});
-inputMinutes.addEventListener('change', (event) => {
-    minutes = event.target.value;
-    updateDisplay();
-});
-inputSeconds.addEventListener('change', (event) => {
-    seconds = event.target.value;
-    updateDisplay();
-});
+}
+const updateDisplay = () => {
+    secondsDisplay.innerHTML = formatTime(seconds);
+    minutesDisplay.innerHTML = formatTime(minutes);
+    hoursDisplay.innerHTML = formatTime(hours);
+};
 
 function toggleChronometer() {
     if (!isRunning) {
-        intervalId = setInterval(count, intervalTime);
+        intervalId = setInterval(countdown, intervalTime);
+        updateDisplay();
         isRunning = true;
-        document.querySelector('button').innerHTML = 'Pause';
+        clearInputFields();
+        startButton.innerHTML = 'Pause';
     } else {
         clearInterval(intervalId);
         isRunning = false;
-        document.querySelector('button').innerHTML = 'Play';
+        startButton.innerHTML = 'Play';
     }
 }
-function count() {
-    seconds--;
-    secondsDisplay.innerHTML = formatTime(seconds);
-    minutesDisplay.innerHTML = formatTime(minutes);
-    hoursDisplay.innerHTML = formatTime(hours);
 
-    // end
-    if (hours === 0 && minutes === 0 && seconds < 0) {
-        clearInterval(intervalId);
-        isRunning = false;
-        document.querySelector('button').innerHTML = 'Play';
-        message.innerHTML = 'Time is up!';
+function countdown() {
+    if (timeIsInvalid({ seconds, minutes, hours })) {
+        reset();
+        message.innerHTML = 'Invalid time';
         return;
     }
-    // minutes less
-    if (seconds < 0) {
-        seconds = 59;
-        if (minutes > 0) {
-            minutes--;
-        } else if (hours > 0) {
-            minutes = 59;
-            hours--;
-        }
+    if (timeIsUp({ seconds, minutes, hours })) {
+        clearInterval(intervalId);
+        document.querySelector('button').innerHTML = 'Play';
+        message.innerHTML = 'Time is up!';
+        seconds = minutes = hours = 0;
+        updateDisplay();
+        isRunning = false;
+        clearInputFields();
+        return;
     }
-}
-function updateDisplay() {
-    secondsDisplay.innerHTML = formatTime(seconds);
-    minutesDisplay.innerHTML = formatTime(minutes);
-    hoursDisplay.innerHTML = formatTime(hours);
-}
-function formatTime(time) {
-    return time < 10 ? '0' + time : time;
+    const updatedTime = decrementTime({ seconds, minutes, hours });
+    seconds = updatedTime.seconds;
+    minutes = updatedTime.minutes;
+    hours = updatedTime.hours;
+    updateDisplay();
 }
 
 function reset() {
@@ -85,8 +78,14 @@ function reset() {
     seconds = minutes = hours = 0;
     startButton.innerHTML = 'Start';
     message.innerHTML = '';
+    clearInputFields();
     updateDisplay();
     if (isRunning) {
         toggleChronometer();
     }
 }
+startButton.addEventListener('click', toggleChronometer);
+resetButton.addEventListener('click', reset);
+inputHours.addEventListener('change', updateTimeFromInput);
+inputMinutes.addEventListener('change', updateTimeFromInput);
+inputSeconds.addEventListener('change', updateTimeFromInput);

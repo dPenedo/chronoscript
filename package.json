@@ -1,0 +1,25 @@
+{
+    "name": "chronostalgic",
+    "version": "1.0.0",
+    "description": "ChronoScript is a retro-styled stopwatch, countdown and world-times application built with vanilla JavaScript, HTML, and CSS. It has a retro style based on the venerable Dracula theme, but the palette is slightly different. It has hours, minutes, seconds and milliseconds.",
+    "type": "module",
+    "jest": {
+        "transform": {
+            "^.+\\.js$": "babel-jest"
+        }
+    },
+    "main": "index.js",
+    "scripts": {
+        "test": "jest"
+    },
+    "keywords": [],
+    "author": "",
+    "license": "ISC",
+    "jest": {
+        "testEnvironment": "jsdom"
+    },
+    "devDependencies": {
+        "jest": "^29.7.0",
+        "jest-environment-jsdom": "^29.7.0"
+    }
+}
