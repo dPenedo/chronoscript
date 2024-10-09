@@ -4,9 +4,7 @@
     "description": "ChronoScript is a retro-styled stopwatch, countdown and world-times application built with vanilla JavaScript, HTML, and CSS. It has a retro style based on the venerable Dracula theme, but the palette is slightly different. It has hours, minutes, seconds and milliseconds.",
     "type": "module",
     "jest": {
-        "transform": {
-            "^.+\\.js$": "babel-jest"
-        }
+        "testEnvironment": "jsdom"
     },
     "main": "index.js",
     "scripts": {
@@ -15,10 +13,9 @@
     "keywords": [],
     "author": "",
     "license": "ISC",
-    "jest": {
-        "testEnvironment": "jsdom"
-    },
     "devDependencies": {
+        "@babel/preset-env": "^7.25.7",
+        "babel-jest": "^29.7.0",
         "jest": "^29.7.0",
         "jest-environment-jsdom": "^29.7.0"
     }

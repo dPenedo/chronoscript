@@ -1,4 +1,4 @@
-import { formatTime, increaseTime } from './utils.js';
+import { formatTime, calculateTimeFromMilliseconds } from './utils.js';
 
 const millisecondsDisplay = document.querySelector('.clock__millisec');
 const secondsDisplay = document.querySelector('.clock__sec');
@@ -7,10 +7,7 @@ const hoursDisplay = document.querySelector('.clock__hours');
 const startButton = document.querySelector('.button__play-pause');
 const resetButton = document.querySelector('.button__reset');
 
-let milliseconds = 0;
-let seconds = 0;
-let minutes = 0;
-let hours = 0;
+let totalMilliseconds = 0;
 let isRunning = false;
 let intervalId;
 
@@ -29,20 +26,17 @@ function toggleChronometer() {
     }
 }
 function count() {
-    milliseconds++;
-    millisecondsDisplay.innerHTML = formatTime(milliseconds);
-    secondsDisplay.innerHTML = formatTime(seconds);
-    minutesDisplay.innerHTML = formatTime(minutes);
-    hoursDisplay.innerHTML = formatTime(hours);
+    const time = calculateTimeFromMilliseconds(totalMilliseconds);
+    millisecondsDisplay.innerHTML = formatTime(time.milliseconds);
+    secondsDisplay.innerHTML = formatTime(time.seconds);
+    minutesDisplay.innerHTML = formatTime(time.minutes);
+    hoursDisplay.innerHTML = formatTime(time.hours);
 
-    const updatedTime = increaseTime({ milliseconds, seconds, minutes, hours });
-    milliseconds = updatedTime.milliseconds;
-    seconds = updatedTime.seconds;
-    minutes = updatedTime.minutes;
-    hours = updatedTime.hours;
+    totalMilliseconds++;
 }
+// WARN: No pasa de milliseconds
 function updateDisplay() {
-    millisecondsDisplay.innerHTML = formatTime(milliseconds);
+    millisecondsDisplay.innerHTML = formatTime(totalMilliseconds);
     secondsDisplay.innerHTML = formatTime(seconds);
     minutesDisplay.innerHTML = formatTime(minutes);
     hoursDisplay.innerHTML = formatTime(hours);
@@ -51,7 +45,7 @@ function updateDisplay() {
 function reset() {
     clearInterval(intervalId);
     isRunning = false;
-    milliseconds = seconds = minutes = hours = 0;
+    totalMilliseconds = 0;
     startButton.innerHTML = 'Start';
     updateDisplay();
     if (isRunning) {

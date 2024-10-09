@@ -1,4 +1,8 @@
-import { formatTime, timeIsUp, timeIsInvalid, decreaseTime } from './utils.js';
+import {
+    formatTime,
+    timeIsInvalid,
+    calculateTimeFromMilliseconds,
+} from './utils.js';
 
 const secondsDisplay = document.querySelector('.clock__sec');
 const minutesDisplay = document.querySelector('.clock__min');
@@ -10,11 +14,9 @@ const inputMinutes = document.getElementById('min-timer-input');
 const inputSeconds = document.getElementById('sec-timer-input');
 const message = document.getElementById('message');
 
-let seconds = 0;
-let minutes = 0;
-let hours = 0;
+let totalSeconds = 0;
 let isRunning = false;
-const intervalTime = 1000; // 1000 ms = 1s
+const intervalTime = 1000;
 let intervalId;
 
 const clearInputFields = () => {
@@ -23,22 +25,25 @@ const clearInputFields = () => {
     inputSeconds.value = '';
 };
 
+const updateDisplay = () => {
+    const time = calculateTimeFromMilliseconds(totalSeconds * 1000);
+    secondsDisplay.innerHTML = formatTime(time.seconds);
+    minutesDisplay.innerHTML = formatTime(time.minutes);
+    hoursDisplay.innerHTML = formatTime(time.hours);
+    console.log(`${time.hours} -- ${time.minutes} -- ${time.seconds}`);
+};
+
 function updateTimeFromInput() {
-    hours = parseInt(inputHours.value) || 0;
-    minutes = parseInt(inputMinutes.value) || 0;
-    seconds = parseInt(inputSeconds.value) || 0;
+    const hours = parseInt(inputHours.value) || 0;
+    const minutes = parseInt(inputMinutes.value) || 0;
+    const seconds = parseInt(inputSeconds.value) || 0;
+    totalSeconds = hours * 3600 + minutes * 60 + seconds;
     updateDisplay();
 }
-const updateDisplay = () => {
-    secondsDisplay.innerHTML = formatTime(seconds);
-    minutesDisplay.innerHTML = formatTime(minutes);
-    hoursDisplay.innerHTML = formatTime(hours);
-};
 
 function toggleChronometer() {
     if (!isRunning) {
         intervalId = setInterval(countdown, intervalTime);
-        updateDisplay();
         isRunning = true;
         clearInputFields();
         startButton.innerHTML = 'Pause';
@@ -50,40 +55,33 @@ function toggleChronometer() {
 }
 
 function countdown() {
-    if (timeIsInvalid({ seconds, minutes, hours })) {
+    if (totalSeconds === 0) {
+        clearInterval(intervalId);
+        message.innerHTML = 'Time is up!';
+        totalSeconds = 0;
+        updateDisplay();
+        isRunning = false;
+        return;
+    }
+    if (timeIsInvalid(totalSeconds)) {
         reset();
         message.innerHTML = 'Invalid time';
         return;
     }
-    if (timeIsUp({ seconds, minutes, hours })) {
-        clearInterval(intervalId);
-        document.querySelector('button').innerHTML = 'Play';
-        message.innerHTML = 'Time is up!';
-        seconds = minutes = hours = 0;
-        updateDisplay();
-        isRunning = false;
-        clearInputFields();
-        return;
-    }
-    const updatedTime = decreaseTime({ seconds, minutes, hours });
-    seconds = updatedTime.seconds;
-    minutes = updatedTime.minutes;
-    hours = updatedTime.hours;
+    totalSeconds--;
     updateDisplay();
 }
 
 function reset() {
     clearInterval(intervalId);
     isRunning = false;
-    seconds = minutes = hours = 0;
+    totalSeconds = 0;
     startButton.innerHTML = 'Start';
     message.innerHTML = '';
     clearInputFields();
     updateDisplay();
-    if (isRunning) {
-        toggleChronometer();
-    }
 }
+
 startButton.addEventListener('click', toggleChronometer);
 resetButton.addEventListener('click', reset);
 inputHours.addEventListener('change', updateTimeFromInput);
