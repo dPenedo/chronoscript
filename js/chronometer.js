@@ -1,13 +1,13 @@
-import { formatTime, calculateTimeFromMilliseconds } from './utils.js';
+import { formatTime, calculateTimeFromCentiseconds } from './utils.js';
 
-const millisecondsDisplay = document.querySelector('.clock__millisec');
+const centisecondsDisplay = document.querySelector('.clock__centisec');
 const secondsDisplay = document.querySelector('.clock__sec');
 const minutesDisplay = document.querySelector('.clock__min');
 const hoursDisplay = document.querySelector('.clock__hours');
 const startButton = document.querySelector('.button__play-pause');
 const resetButton = document.querySelector('.button__reset');
 
-let totalMilliseconds = 0;
+let totalCentiseconds = 0;
 let isRunning = false;
 let intervalId;
 
@@ -26,17 +26,17 @@ function toggleChronometer() {
     }
 }
 function count() {
-    const time = calculateTimeFromMilliseconds(totalMilliseconds);
-    millisecondsDisplay.innerHTML = formatTime(time.milliseconds);
+    const time = calculateTimeFromCentiseconds(totalCentiseconds);
+    centisecondsDisplay.innerHTML = formatTime(time.centiseconds);
     secondsDisplay.innerHTML = formatTime(time.seconds);
     minutesDisplay.innerHTML = formatTime(time.minutes);
     hoursDisplay.innerHTML = formatTime(time.hours);
 
-    totalMilliseconds++;
+    totalCentiseconds++;
 }
 // WARN: No pasa de milliseconds
 function updateDisplay() {
-    millisecondsDisplay.innerHTML = formatTime(totalMilliseconds);
+    centisecondsDisplay.innerHTML = formatTime(totalCentiseconds);
     secondsDisplay.innerHTML = formatTime(seconds);
     minutesDisplay.innerHTML = formatTime(minutes);
     hoursDisplay.innerHTML = formatTime(hours);
@@ -45,7 +45,7 @@ function updateDisplay() {
 function reset() {
     clearInterval(intervalId);
     isRunning = false;
-    totalMilliseconds = 0;
+    totalCentiseconds = 0;
     startButton.innerHTML = 'Start';
     updateDisplay();
     if (isRunning) {

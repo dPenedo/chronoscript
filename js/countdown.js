@@ -1,8 +1,4 @@
-import {
-    formatTime,
-    timeIsInvalid,
-    calculateTimeFromMilliseconds,
-} from './utils.js';
+import { formatTime, calculateTimeFromCentiseconds } from './utils.js';
 
 const secondsDisplay = document.querySelector('.clock__sec');
 const minutesDisplay = document.querySelector('.clock__min');
@@ -16,7 +12,7 @@ const message = document.getElementById('message');
 
 let totalSeconds = 0;
 let isRunning = false;
-const intervalTime = 1000;
+const intervalTime = 1000; // 1000 is a second
 let intervalId;
 
 const clearInputFields = () => {
@@ -26,7 +22,7 @@ const clearInputFields = () => {
 };
 
 const updateDisplay = () => {
-    const time = calculateTimeFromMilliseconds(totalSeconds * 1000);
+    const time = calculateTimeFromCentiseconds(totalSeconds * 100);
     secondsDisplay.innerHTML = formatTime(time.seconds);
     minutesDisplay.innerHTML = formatTime(time.minutes);
     hoursDisplay.innerHTML = formatTime(time.hours);
@@ -63,11 +59,12 @@ function countdown() {
         isRunning = false;
         return;
     }
-    if (timeIsInvalid(totalSeconds)) {
+    if (totalSeconds < 0) {
         reset();
         message.innerHTML = 'Invalid time';
         return;
     }
+    message.innerHTML = '';
     totalSeconds--;
     updateDisplay();
 }
