@@ -11,11 +11,3 @@ export const calculateTimeFromCentiseconds = (totalCentiseconds) => {
 
     return { hours, minutes, seconds, centiseconds };
 };
-export const timeIsInvalid = (totalSeconds) => {
-    const time = calculateTimeFromCentiseconds(totalSeconds);
-    time.minutes > 59 ||
-        time.seconds > 59 ||
-        time.hours < 0 ||
-        time.minutes < 0 ||
-        time.seconds < 0;
-};
