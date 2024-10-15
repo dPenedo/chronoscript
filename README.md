@@ -1,18 +1,30 @@
 # ChronoScript
 ## Description
-ChronoScript is a retro-styled stopwatch, countdown and world-times application built with vanilla JavaScript, HTML, and CSS. It has a retro style based on the venerable Dracula theme, but the palette is slightly different. It has hours, minutes, seconds and milliseconds.
+ChronoScript is a web application that includes three sections:
+1. **Stopwatch**
+2. **Countdown** 
+3. **World-times**
 
-## Usage of the stopwatch
-It's simple:
-- The "Start" button has three modes:
-        1. "Start", to begin the stopwatch
-        2. "Stop", to stop the stopwatch
-        3. "Pause", to pause the stopwatch
-- The "Reset" button reset the stopwatch to zero.
+It's builded two times in separate directories:
+1. **Vanilla JavaScript, HTML, and CSS**. It has a retro style based on the venerable [Dracula theme](https://github.com/dracula/dracula-theme)
+2. **React + TypeScript**.
 
-## Usage of the countdown
+
+## Stopwatch Usage
+Using the stopwatch is straightforward:
 - The "Start" button has three modes:
-        1. "Start", to begin the stopwatch
-        2. "Stop", to stop the stopwatch
-        3. "Pause", to pause the stopwatch
-- The "Reset" button reset the stopwatch to zero.
+    1. "Start" to begin the stopwatch
+    2. "Stop" to halt the stopwatch
+    3. "Pause" to temporarily pause the stopwatch
+- The "Reset" button resets the stopwatch to zero.
+
+## Countdown Timer Usage
+Using the countdown timer is similar:
+- The "Start" button has three modes:
+    1. "Start" to begin the countdown
+    2. "Stop" to halt the countdown
+    3. "Pause" to temporarily pause the countdown
+- The "Reset" button resets the countdown to zero.
+
+## World Clock Usage
+The world clock automatically detects your city’s timezone. You can select any city from the `Select a city` dropdown menu to view the current time in that location.
