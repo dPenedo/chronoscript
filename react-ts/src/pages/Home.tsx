@@ -1,27 +1,51 @@
+import { useEffect, useState } from 'react';
+import Button from '../components/Button';
+import Clock from '../components/Clock';
+import {calculateTimeFromCentiseconds} from '../utils/timeUtils';
+
+
 export default function Home() {
+    const [countValue, setCountValue] = useState(0);
+    const [isRunning, setIsRunning] = useState(false);
+    const intervalValue = 10;
+
+    const toggleCount = () => {
+        if (isRunning) {
+            setIsRunning(false);
+        } else {
+            setIsRunning(true);
+        }
+    }
+    const resetCount = () => {
+        setIsRunning(false);
+        setCountValue(0);
+        console.log('reiniciado');
+    };
+    useEffect(() => {
+        // type possible problem?
+        let intervalId: number;
+        if (isRunning) {
+            intervalId = setInterval(() => {
+                setCountValue((countValue) => countValue + 1);
+            }, intervalValue);
+        }
+        return () => clearInterval(intervalId);
+    }, [isRunning]);
+    const {hours, minutes, seconds, centiseconds} = calculateTimeFromCentiseconds(countValue);
     return (
         <div className="section">
-            <div>
-                <h1 className="section__title">Start</h1>
-            </div>
-        <h1 className="main-title">CHRONOMETER</h1>
-        <div className="clock">
-            <div className="clock__container">
-                <div className="clock__hours">00</div>
-                <div className="clock__separator">:</div>
-                <div className="clock__min">00</div>
-                <div className="clock__separator">:</div>
-                <div className="clock__sec">00</div>
-                <div className="clock__separator">:</div>
-                <div className="clock__centisec">00</div>
-            </div>
-        </div>
+            <h1 className="main-title">CHRONOMETER</h1>
+            <Clock
+                hours={hours}
+                minutes={minutes}
+                seconds={seconds}
+                centiseconds={centiseconds}
+                showCentiseconds={true} / >
 
-        <div className="buttons__container">
-            <button className="button button__play-pause">Start</button>
-
-            <button className="button button__reset">Reset</button>
-        </div>
+            <div className="buttons__container">
+                <Button onClick={toggleCount}>{isRunning ? 'Stop' : 'Start'}</Button>
+                <Button onClick={resetCount}>Reset</Button>
+            </div>
         </div>
     );
 }

@@ -1,0 +1,27 @@
+.button {
+    background-color: var(--blue);
+    color: var(--bg);
+    border-color: var(--purple);
+    font-family: 'Kode Mono';
+    font-size: 2em;
+    font-weight: 900;
+    width: 8em;
+    border-radius: 5px;
+    padding: 0.5em;
+    transition:
+        background-color 0.3s ease,
+        color 0.3s ease;
+    margin: 1em;
+}
+
+.button:hover {
+    background-color: var(--purple);
+    color: var(--white);
+    border-color: var(--blue);
+    cursor: pointer;
+}
+@media (min-width: 1200px) {
+    .button {
+        font-size: 0.8em;
+    }
+}

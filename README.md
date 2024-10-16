@@ -1,13 +1,12 @@
 # ChronoScript
-## Description
-ChronoScript is a web application that includes three sections:
-1. **Stopwatch**
-2. **Countdown** 
-3. **World-times**
+ChronoScript is a web application made two times:
+1. The **Vanilla JavaScript, HTML, and CSS**. It only has external libraries for testing: `Jest`.
+2. The **React + TypeScript** built with **vite**. it also has external libraries such as `React-router-dom` and `Jest` for testing.
 
-It's builded two times in separate directories:
-1. **Vanilla JavaScript, HTML, and CSS**. It has a retro style based on the venerable [Dracula theme](https://github.com/dracula/dracula-theme)
-2. **React + TypeScript**.
+Both of them include three sections:
+1. **Stopwatch**
+2. **Countdown**
+3. **World-times**
 
 
 ## Stopwatch Usage
