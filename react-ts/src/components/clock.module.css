@@ -1,0 +1,27 @@
+.clock {
+    display: flex;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 0.5em;
+    margin-bottom: 0.5em;
+    padding: 1.5rem;
+    border: 2px solid var(--purple);
+    font-size: 4em;
+    border-radius: 5px;
+    max-width: max-content;
+    max-height: fit-content;
+}
+
+.clock__separator {
+    margin-left: 0.2em;
+    margin-right: 0.2em;
+}
+
+@media (min-width: 1200px) {
+    .clock__container {
+        margin-top: 1em;
+        margin-bottom: 1em;
+        font-size: 1.8em;
+        padding: 4vh;
+    }
+}

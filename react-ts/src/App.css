@@ -26,6 +26,7 @@ body {
 .main-content {
     flex: 1;
     margin: 0;
+    height: 80vh;
 }
 
 .main-title {
@@ -34,33 +35,6 @@ body {
     display: flex;
     justify-content: center;
     font-size: 6em;
-}
-
-.clock__container {
-    display: flex;
-    margin-left: auto;
-    margin-right: auto;
-    margin-top: 0.5em;
-    margin-bottom: 0.5em;
-    padding: 2vh;
-    border: 2px solid var(--purple);
-    font-size: 4em;
-    border-radius: 5px;
-    max-width: max-content;
-    max-height: fit-content;
-}
-
-/*Se usa?*/
-.clock__title {
-    font-size: 3em;
-    display: flex;
-    justify-content: center;
-    color: var(--white);
-}
-
-.clock__separator {
-    margin-left: 0.2em;
-    margin-right: 0.2em;
 }
 
 .buttons__container {
@@ -73,17 +47,6 @@ body {
     .main-title {
         font-size: 3em;
     }
-
-    .clock__container {
-        margin-top: 1em;
-        margin-bottom: 1em;
-        font-size: 1.8em;
-        padding: 4vh;
-    }
-    .clock__title {
-        font-size: 1.5em;
-    }
-
     .main-content {
         flex: 1;
         margin: 0 20% 0;
