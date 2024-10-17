@@ -9,11 +9,14 @@ export default function App() {
     return (
         <>
             <Header />
+            <main>
+
             <Routes>
                 <Route path="/" element={<Home />} />
                 <Route path="/countdown" element={<Countdown />} />
                 <Route path="/world-times" element={<WorldTimes />} />
             </Routes>
+            </main>
             <Footer />
         </>
     );

@@ -1,0 +1,6 @@
+.footer {
+    position: absolute;
+}
+.footer__text {
+    font-size: 1rem;
+}

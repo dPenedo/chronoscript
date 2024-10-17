@@ -1,0 +1,24 @@
+.navbar {
+    display: flex;
+    justify-content: center;
+    border-bottom: 2px solid var(--purple);
+    padding: 0;
+    margin-left: -1vh;
+    margin-right: -1vh;
+}
+
+.navbar__link {
+    text-decoration: none;
+    color: var(--purple);
+    font-weight: 600;
+    font-size: 2em;
+    padding: 1em;
+    transition: all 0.5s ease;
+}
+
+.navbar__link:hover {
+    background-color: var(--purple);
+    color: var(--bg);
+    border-color: var(--green);
+    cursor: pointer;
+}
