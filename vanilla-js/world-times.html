@@ -1,62 +1,86 @@
 <!doctype html>
 <html lang="en">
+    <head>
+        <title>Chronostalgic - Worl times</title>
 
-<head>
-    <title>Chronostalgic - Worl times</title>
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Kode+Mono:wght@400..700&display=swap"
+            rel="stylesheet"
+        />
 
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Kode+Mono:wght@400..700&display=swap" rel="stylesheet" />
+        <!-- favicons -->
+        <link rel="icon" href="img/favicon.ico" type="image/x-icon" />
+        <link
+            rel="apple-touch-icon"
+            sizes="180x180"
+            href="/img/apple-touch-icon.png"
+        />
+        <link
+            rel="icon"
+            type="image/png"
+            sizes="192x192"
+            href="/img/android-chrome-192x192.png"
+        />
 
-    <!-- favicons -->
-    <link rel="icon" href="img/favicon.ico" type="image/x-icon" />
-    <link rel="apple-touch-icon" sizes="180x180" href="/img/apple-touch-icon.png" />
-    <link rel="icon" type="image/png" sizes="192x192" href="/img/android-chrome-192x192.png" />
+        <link rel="stylesheet" href="css/styles.css" />
+        <link rel="stylesheet" href="css/world-times.css" />
+        <script defer src="js/world-times.js"></script>
+    </head>
 
-    <link rel="stylesheet" href="css/styles.css" />
-    <link rel="stylesheet" href="css/world-times.css" />
-    <script defer src="js/world-times.js"></script>
-</head>
+    <body>
+        <div class="content-wrapper">
+            <!-- ========== Navbar  ========== -->
+            <nav class="navbar">
+                <a class="navbar__link" href="index.html">Chronometer</a>
+                <a class="navbar__link" href="countdown.html">Countdown</a>
+            </nav>
+            <!-- ========== Navbar  ========== -->
 
-<body>
-    <!-- ========== Navbar  ========== -->
-    <nav class="navbar">
-        <a class="navbar__link" href="index.html">Chronometer</a>
-        <a class="navbar__link" href="countdown.html">Countdown</a>
-    </nav>
-    <!-- ========== Navbar  ========== -->
-
-    <h1 class="main-title">World Times</h1>
-    <div class="clock">
-        <h1 class="clock__title">Your City's Time</h1>
-        <div class="clock__container">
-            <div class="clock__hours clock__hours-main">00</div>
-            <div class="clock__separator">:</div>
-            <div class="clock__min clock__min-main">00</div>
-            <div class="clock__separator">:</div>
-            <div class="clock__sec clock__sec-main">00</div>
+            <h1 class="main-title">World Times</h1>
+            <div class="clock">
+                <h1 class="clock__title">Your City's Time</h1>
+                <div class="clock__container">
+                    <div class="clock__hours clock__hours-main">00</div>
+                    <div class="clock__separator">:</div>
+                    <div class="clock__min clock__min-main">00</div>
+                    <div class="clock__separator">:</div>
+                    <div class="clock__sec clock__sec-main">00</div>
+                </div>
+            </div>
+            <div class="clock second-clock">
+                <h1 class="clock__title" id="selected-city-name">
+                    Selected City's Time
+                </h1>
+                <div class="clock__container">
+                    <div class="clock__hours second-clock__hours">00</div>
+                    <div class="clock__separator">:</div>
+                    <div class="clock__min second-clock__min">00</div>
+                    <div class="clock__separator">:</div>
+                    <div class="clock__sec second-clock__sec">00</div>
+                </div>
+            </div>
+            <div class="cities">
+                <button class="cities__button">Select a city ⬇</button>
+                <div class="cities__content">
+                    <form class="cities__form" method="get">
+                        <select
+                            class="cities__select"
+                            name="cities"
+                            id="cities"
+                            size="8"
+                        ></select>
+                    </form>
+                </div>
+            </div>
         </div>
-    </div>
-    <div class="clock second-clock">
-        <h1 class="clock__title" id="selected-city-name">
-            Selected City's Time
-        </h1>
-        <div class="clock__container">
-            <div class="clock__hours second-clock__hours">00</div>
-            <div class="clock__separator">:</div>
-            <div class="clock__min second-clock__min">00</div>
-            <div class="clock__separator">:</div>
-            <div class="clock__sec second-clock__sec">00</div>
-        </div>
-    </div>
-    <div class="cities">
-        <button class="cities__button">Select a city ⬇</button>
-        <div class="cities__content">
-            <form class="cities__form" method="get">
-                <select class="cities__select" name="cities" id="cities" size="8"></select>
-            </form>
-        </div>
-    </div>
-</body>
-
+        <footer class="footer">
+            <p class="footer__text">
+                This is a playground App, made with React, with the purpose of
+                practice. Developed and designed by
+                <a class="footer__link" href="http://dpenedo.com"> dPenedo </a>
+            </p>
+        </footer>
+    </body>
 </html>

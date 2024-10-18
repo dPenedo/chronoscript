@@ -1,8 +1,15 @@
 .footer {
-    position: absolute;
-    bottom: 0;
     width: 100%;
+    margin-top: auto;
+    padding: 1em 0;
 }
 .footer__text {
     font-size: 1rem;
+    text-align: center;
+}
+.footer__link {
+    text-decoration: none;
+    color: inherit;
+    text-decoration: underline;
+    font-weight: 900;
 }

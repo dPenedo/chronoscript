@@ -4,10 +4,11 @@ import Footer from './components/Footer';
 import Home from './pages/Home';
 import Countdown from './pages/Countdown';
 import WorldTimes from './pages/WorldTimes';
+import './App.css';
 
 export default function App() {
     return (
-        <>
+            <>
             <Header />
             <main>
 
@@ -18,6 +19,6 @@ export default function App() {
             </Routes>
             </main>
             <Footer />
-        </>
+            </>
     );
 }
