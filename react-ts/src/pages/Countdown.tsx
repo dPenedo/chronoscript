@@ -2,6 +2,7 @@ import { ChangeEvent, useEffect, useState } from "react";
 import Clock from "../components/Clock";
 import Button from "../components/Button";
 import { calculateTimeFromCentiseconds } from "../utils/timeUtils";
+import Styles from "./countdown.module.css";
 
 export default function Countdown() {
     const [countValue, setCountValue] = useState(0);
@@ -37,6 +38,7 @@ export default function Countdown() {
             setInputValue({ hours: hours, minutes: minutes, seconds: seconds });
         } else {
             // Set countValue based on the current input values
+            setMessage('Countdown started');
             setCountValue(getTotalCentiseconds());
             setIsRunning(true);
         }
@@ -56,7 +58,7 @@ export default function Countdown() {
     useEffect(() => {
         let intervalId: number;
         if (isRunning && countValue > 0) {
-            console.log(`is running ${countValue}`)
+            console.log(`is running${countValue}`)
             intervalId = setInterval(() => {
                 setCountValue((prev) => prev - 100); // Decrement by 1000 (1 second in centiseconds)
             }, intervalValue);
@@ -75,11 +77,11 @@ export default function Countdown() {
             <h1 className="main-title">Countdown</h1>
             <Clock hours={hours} minutes={minutes} seconds={seconds} showCentiseconds={false} />
 
-            <div className="set-timer">
-                <form className="set-timer__form" method="get">
+            <div className={Styles.setTimer}>
+                <form className={Styles.setTimer__form} method="get">
                     <label className="set-timer__label" htmlFor="hours-timer-input">Enter hours:</label>
                     <input
-                        className="set-timer__input"
+                        className={Styles.setTimer__input}
                         type="text"
                         id="hours-timer-input"
                         name="hours"
@@ -92,7 +94,7 @@ export default function Countdown() {
 
                     <label className="set-timer__label" htmlFor="minutes-timer-input">Enter minutes:</label>
                     <input
-                        className="set-timer__input"
+                        className={Styles.setTimer__input}
                         type="text"
                         id="minutes-timer-input"
                         name="minutes"
@@ -105,7 +107,7 @@ export default function Countdown() {
 
                     <label className="set-timer__label" htmlFor="seconds-timer-input">Enter seconds:</label>
                     <input
-                        className="set-timer__input"
+                        className={Styles.setTimer__input}
                         type="text"
                         id="seconds-timer-input"
                         name="seconds"
@@ -122,8 +124,8 @@ export default function Countdown() {
                 <Button onClick={toggleCountdown}>{isRunning ? 'Pause' : 'Start'}</Button>
                 <Button onClick={resetCountdown}>Reset</Button>
             </div>
-            <div className="message__container">
-                <p className="message__text" id="message">{message}</p>
+            <div className={Styles.message__container}>
+                <p className={Styles.message__text} id="message">{message}</p>
             </div>
         </div>
     );

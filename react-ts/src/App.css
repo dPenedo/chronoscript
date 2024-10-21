@@ -24,14 +24,10 @@ body {
     min-height: 100vh;
 }
 
-main {
-    flex: 1;
-}
-
 .main-content {
     flex: 1;
     margin: 0;
-    height: 80vh;
+    margin: 1rem 1rem;
 }
 
 .main-title {

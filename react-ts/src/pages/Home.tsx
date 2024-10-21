@@ -34,7 +34,7 @@ export default function Home() {
     const {hours, minutes, seconds, centiseconds} = calculateTimeFromCentiseconds(countValue);
     return (
         <div className="section">
-            <h1 className="main-title">CHRONOMETER</h1>
+            <h1 className="main-title">STOPWATCH</h1>
             <Clock
                 hours={hours}
                 minutes={minutes}

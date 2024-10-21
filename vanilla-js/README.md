@@ -1,5 +1,9 @@
 # ChronoScript-Vanilla
 
+> [!WARNING]
+> Cambiar los tamaños con rem y un solo valor de root.
+
+
 ## Vanilla version
 ChronoScript-Vanilla is a retro-styled stopwatch, countdown timer, and world clock application built with vanilla **JavaScript, HTML, and CSS**. It features a retro design inspired by the venerable [Dracula theme](https://github.com/dracula/dracula-theme). The application tracks hours, minutes, seconds, and milliseconds. This project is part of the [ChronoScript project](https://github.com/dpenedo/chronoscript), which also includes a version built with **React and TypeScript**.
 

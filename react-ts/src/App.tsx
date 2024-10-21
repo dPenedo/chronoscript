@@ -10,7 +10,7 @@ export default function App() {
     return (
             <>
             <Header />
-            <main>
+            <main className="main-content">
 
             <Routes>
                 <Route path="/" element={<Home />} />
