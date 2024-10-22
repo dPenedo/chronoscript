@@ -8,6 +8,8 @@ const firstClockSeconds = document.querySelector('.clock__sec-main');
 const secondClockHours = document.querySelector('.second-clock__hours');
 const secondclockMinutes = document.querySelector('.second-clock__min');
 const secondclockSeconds = document.querySelector('.second-clock__sec');
+const citiesButton = document.querySelector('.cities__button');
+const citiesContent = document.querySelector('.cities__content');
 
 // Create forms options
 fetch('http://worldtimeapi.org/api/timezone/')
@@ -24,7 +26,7 @@ fetch('http://worldtimeapi.org/api/timezone/')
         }
     })
     .catch((error) => {
-        console.log('Error: ' + error);
+        console.log('Error:' + error);
     });
 
 function updateTime() {
@@ -54,7 +56,7 @@ function updateTime() {
                 secondclockSeconds.textContent = secondSeconds;
             })
             .catch((error) => {
-                console.log('Error: ' + error);
+                console.log('Error:' + error);
             });
     }
 }
@@ -64,18 +66,15 @@ setInterval(updateTime, 1000);
 // Get the time for the first time
 updateTime();
 
-const citiesButton = document.querySelector('.cities__button');
-const citiesContent = document.querySelector('.cities__content');
-
 function closeAccordion() {
     citiesContent.classList.remove('active');
 }
 
-citiesButton.addEventListener('click', function(event) {
+citiesButton.addEventListener('click', function (event) {
     citiesContent.classList.toggle('active');
     event.stopPropagation();
 });
-document.addEventListener('click', function(event) {
+document.addEventListener('click', function (event) {
     const target = event.target;
     if (!citiesContent.contains(target) && !citiesButton.contains(target)) {
         closeAccordion();
