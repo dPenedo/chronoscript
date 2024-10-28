@@ -15,9 +15,9 @@
     font-family: 'Kode Mono', sans-serif;
     font-size: 1rem;
     background-color: var(--yellow);
-    width: 15em;
+    width: 12rem;
+    max-width: 18rem;
     padding: 0.5em;
-    max-width: 18em;
     margin-left: auto;
     margin-right: auto;
     margin-top: 1em;
@@ -63,7 +63,7 @@
     }
     .cities__button {
         margin-top: 0.4em;
-        font-size: 2em;
+        font-size: 1em;
     }
     .cities__select {
         font-size: 1.8em;
@@ -75,7 +75,7 @@
     }
     .cities__button {
         margin-top: 0.2em;
-        font-size: 1.5em;
+        font-size: 1.2em;
     }
     .cities__select {
         font-size: 1.5em;
