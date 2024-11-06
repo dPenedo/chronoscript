@@ -10,6 +10,7 @@ const secondclockMinutes = document.querySelector('.second-clock__min');
 const secondclockSeconds = document.querySelector('.second-clock__sec');
 const citiesButton = document.querySelector('.cities__button');
 const citiesContent = document.querySelector('.cities__content');
+const errorMessage = document.querySelector('#error-message');
 
 // Create forms options
 fetch('http://worldtimeapi.org/api/timezone/')
@@ -26,7 +27,9 @@ fetch('http://worldtimeapi.org/api/timezone/')
         }
     })
     .catch((error) => {
-        console.log('Error:' + error);
+        console.error('Error:', error);
+        errorMessage.innerHTML =
+            "Oops! Something went wrong. The time data couldn't be loaded from worldtimAPI server. Please try again later.";
     });
 
 function updateTime() {
@@ -39,7 +42,7 @@ function updateTime() {
     firstClockMinutes.textContent = firstMinutes;
     firstClockHours.textContent = firstHours;
 
-    selectedCity = citySelect.value;
+    let selectedCity = citySelect.value;
     if (selectedCity != '') {
         selectedCityName.textContent = selectedCity;
         fetch(`http://worldtimeapi.org/api/timezone/${selectedCity}`)
@@ -56,7 +59,9 @@ function updateTime() {
                 secondclockSeconds.textContent = secondSeconds;
             })
             .catch((error) => {
-                console.log('Error:' + error);
+                console.error('Error:', error);
+                errorMessage.innerHTML =
+                    "Oops! Something went wrong. The time data couldn't be loaded from worldtimAPI server. Please try again later.";
             });
     }
 }

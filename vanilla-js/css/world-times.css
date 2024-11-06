@@ -44,6 +44,11 @@
     width: 14em;
 }
 
+#error-message {
+    color: var(--red);
+    padding: 3rem;
+}
+
 .cities__option:hover {
     background-color: var(--green);
     color: var(--bg);
