@@ -46,7 +46,7 @@
 
 #error-message {
     color: var(--red);
-    padding: 3rem;
+    padding: 1rem;
 }
 
 .cities__option:hover {

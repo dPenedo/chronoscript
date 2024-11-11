@@ -12,13 +12,16 @@ const secondClockSeconds = document.querySelector('.second-clock__sec');
 const citiesButton = document.querySelector('.cities__button');
 const citiesContent = document.querySelector('.cities__content');
 const errorMessage = document.querySelector('#error-message');
-let timeZoneOffsetHours = 999;
+// const URLForCitiesList = 'http://worldtimeapi.org/api/timezone/';
+const URLForListOfCities = 'https://timeapi.io/api/timezone/availabletimezones';
+const URLForGettingTheTimeZone =
+    'https://timeapi.io/api/timezone/zone?timeZone=';
+let timeZoneOffsetMinutes = 9999;
 
 // Create forms options
-fetch('http://worldtimeapi.org/api/timezone/')
+fetch(URLForListOfCities)
     .then((response) => response.json())
     .then((data) => {
-        console.log(data);
         data.forEach((place) => {
             const option = document.createElement('option');
             option.value = place;
@@ -36,18 +39,14 @@ fetch('http://worldtimeapi.org/api/timezone/')
 citySelect.addEventListener('change', (e) => {
     const selectedCity = citySelect.value;
     selectedCityName.textContent = selectedCity;
-    fetch(`http://worldtimeapi.org/api/timezone/${selectedCity}`)
+    console.log(selectedCity);
+    const selectedCityEndPoint = selectedCity.toLowerCase();
+    fetch(`${URLForGettingTheTimeZone}${selectedCityEndPoint}`)
         .then((response) => response.json())
         .then((data) => {
-            let utcOffset = data.utc_offset;
-            // Convertir el offset en horas
-            const [sign, hours, minutes] = utcOffset
-                .match(/([+-])(\d{2}):(\d{2})/)
-                .slice(1);
-            timeZoneOffsetHours = getOffsetInHours(data.utcOffset);
-
-            console.log(`Offset en horas: ${timeZoneOffsetHours}`);
-            timeZoneOffsetHours = utcOffset;
+            let utcOffsetSeconds = data.standardUtcOffset.seconds;
+            timeZoneOffsetMinutes = utcOffsetSeconds / 60; // -10800 / 60 = -180 minutos
+            console.log(`Offset en minutos: ${timeZoneOffsetMinutes}`);
         })
         .catch((error) => {
             console.error('Error:', error);
@@ -62,20 +61,27 @@ function updateTime() {
     const userLocationHours = formatTime(userLocationNow.getHours());
     const userLocationMinutes = formatTime(userLocationNow.getMinutes());
     const userLocationSeconds = formatTime(userLocationNow.getSeconds());
-    const standardNow = new Date(userLocationNow.getTime());
+    // WARN: ojo que hay lio
+    const standardNow = new Date(
+        userLocationNow.getTime() +
+            userLocationNow.getTimezoneOffset() * 60 * 1000,
+    );
     const selectedNow = new Date(
-        standardNow.getTime() + timeZoneOffsetHours * 60 * 60 * 1000,
-    ); // Sumar 8 horas en milisegundos
+        standardNow.getTime() + timeZoneOffsetMinutes * 60 * 1000,
+    );
+    console.log('------------------------');
+    console.log(`standard now: ${standardNow}`);
+    console.log(`selected now: ${selectedNow}`);
 
-    const selectedHours = formatTime(selectedNow.getUTCHours());
-    const selectedMinutes = formatTime(selectedNow.getUTCMinutes());
-    const selectedSeconds = formatTime(selectedNow.getUTCSeconds());
+    const selectedHours = formatTime(selectedNow.getHours());
+    const selectedMinutes = formatTime(selectedNow.getMinutes());
+    const selectedSeconds = formatTime(selectedNow.getSeconds());
 
     firstClockSeconds.textContent = userLocationSeconds;
     firstClockMinutes.textContent = userLocationMinutes;
     firstClockHours.textContent = userLocationHours;
 
-    if (timeZoneOffsetHours === 999) {
+    if (timeZoneOffsetMinutes === 9999) {
         secondClockHours.textContent = '00';
         secondClockMinutes.textContent = '00';
         secondClockSeconds.textContent = '00';
@@ -84,12 +90,6 @@ function updateTime() {
         secondClockMinutes.textContent = selectedMinutes;
         secondClockSeconds.textContent = selectedSeconds;
     }
-}
-function getOffsetInHours(utcOffset) {
-    const [sign, hours, minutes] = utcOffset
-        .match(/([+-])(\d{2}):(\d{2})/)
-        .slice(1);
-    return parseInt(sign + hours) + parseInt(minutes) / 60;
 }
 
 setInterval(updateTime, 1000);
