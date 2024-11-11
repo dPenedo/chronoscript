@@ -31,7 +31,7 @@
     display: none;
 }
 
-.cities__content.active {
+.cities__content_active {
     display: flex;
     justify-content: center;
     margin-left: auto;
@@ -52,11 +52,17 @@
 }
 
 .cities__option:hover {
-    background-color: var(--green);
+    background-color: var(--purple);
     color: var(--bg);
     font-weight: 600;
     cursor: pointer;
 }
+
+.error_message {
+    color: var(--red);
+    padding: 1rem;
+}
+
 @media (min-width: 780px) {
     .cities {
         font-size: 16px;

@@ -33,7 +33,7 @@ fetch(URLForListOfCities)
     .catch((error) => {
         console.error('Error:', error);
         errorMessage.innerHTML =
-            "Oops! Something went wrong. The time data couldn't be loaded from worldtimAPI server. Please try again later.";
+            "Oops! Something went wrong. The time data couldn't be loaded from timeapi.io server. Please try again later.";
     });
 
 citySelect.addEventListener('change', (e) => {

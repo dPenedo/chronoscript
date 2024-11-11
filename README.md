@@ -35,8 +35,4 @@ Using the countdown timer is similar:
 
 The world clock automatically detects your city’s timezone. You can select any city from the `Select a city` dropdown menu to view the current time in that location.
 
-The API used is [WoldTimeApi](https://worldtimeapi.org/) and as they say they say in the their [FAQs section](https://worldtimeapi.org/pages/faqs):
-
-> The API can go down from time-to-time, for relatively long periods. It is provided with no SLA, no guarantees, and no direct funding.
-
-That's why both apps display error messages in the HTML if this occurs.
+The API used is [TimeApi.io](https://timeapi.io/).
