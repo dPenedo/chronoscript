@@ -38,42 +38,44 @@
             </nav>
             <!-- ========== Navbar  ========== -->
 
-            <h1 class="main-title">World Times</h1>
-            <div class="clock">
-                <h1 class="clock__title">Your City's Time</h1>
-                <div class="clock__container">
-                    <div class="clock__hours clock__hours-main">00</div>
-                    <div class="clock__separator">:</div>
-                    <div class="clock__min clock__min-main">00</div>
-                    <div class="clock__separator">:</div>
-                    <div class="clock__sec clock__sec-main">00</div>
+            <div class="main-content">
+                <h1 class="main-title">World Times</h1>
+                <div class="clock">
+                    <h1 class="clock__title">Your City's Time</h1>
+                    <div class="clock__container">
+                        <div class="clock__hours clock__hours-main">00</div>
+                        <div class="clock__separator">:</div>
+                        <div class="clock__min clock__min-main">00</div>
+                        <div class="clock__separator">:</div>
+                        <div class="clock__sec clock__sec-main">00</div>
+                    </div>
                 </div>
-            </div>
-            <div class="clock second-clock">
-                <h1 class="clock__title" id="selected-city-name">
-                    Selected City's Time
-                </h1>
-                <div class="clock__container">
-                    <div class="clock__hours second-clock__hours">00</div>
-                    <div class="clock__separator">:</div>
-                    <div class="clock__min second-clock__min">00</div>
-                    <div class="clock__separator">:</div>
-                    <div class="clock__sec second-clock__sec">00</div>
+                <div class="clock second-clock">
+                    <h1 class="clock__title" id="selected-city-name">
+                        Selected City's Time
+                    </h1>
+                    <div class="clock__container">
+                        <div class="clock__hours second-clock__hours">00</div>
+                        <div class="clock__separator">:</div>
+                        <div class="clock__min second-clock__min">00</div>
+                        <div class="clock__separator">:</div>
+                        <div class="clock__sec second-clock__sec">00</div>
+                    </div>
                 </div>
-            </div>
-            <div class="cities">
-                <button class="cities__button">Select a city ⬇</button>
-                <div class="cities__content">
-                    <form class="cities__form" method="get">
-                        <select
-                            class="cities__select"
-                            name="cities"
-                            id="cities"
-                            size="8"
-                        ></select>
-                    </form>
+                <div class="cities">
+                    <button class="cities__button">Select a city ⬇</button>
+                    <div class="cities__content">
+                        <form class="cities__form" method="get">
+                            <select
+                                class="cities__select"
+                                name="cities"
+                                id="cities"
+                                size="8"
+                            ></select>
+                        </form>
+                    </div>
+                    <div id="error-message"></div>
                 </div>
-                <div id="error-message"></div>
             </div>
         </div>
         <footer class="footer">

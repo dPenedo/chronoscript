@@ -12,10 +12,10 @@ const secondClockSeconds = document.querySelector('.second-clock__sec');
 const citiesButton = document.querySelector('.cities__button');
 const citiesContent = document.querySelector('.cities__content');
 const errorMessage = document.querySelector('#error-message');
-// const URLForCitiesList = 'http://worldtimeapi.org/api/timezone/';
 const URLForListOfCities = 'https://timeapi.io/api/timezone/availabletimezones';
 const URLForGettingTheTimeZone =
     'https://timeapi.io/api/timezone/zone?timeZone=';
+
 let timeZoneOffsetMinutes = 9999;
 
 // Create forms options
@@ -61,7 +61,6 @@ function updateTime() {
     const userLocationHours = formatTime(userLocationNow.getHours());
     const userLocationMinutes = formatTime(userLocationNow.getMinutes());
     const userLocationSeconds = formatTime(userLocationNow.getSeconds());
-    // WARN: ojo que hay lio
     const standardNow = new Date(
         userLocationNow.getTime() +
             userLocationNow.getTimezoneOffset() * 60 * 1000,

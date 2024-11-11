@@ -38,64 +38,66 @@
             </nav>
             <!-- ========== Navbar 🠩 ========== -->
 
-            <h1 class="main-title">Countdown</h1>
-            <div class="clock">
-                <div class="clock__container">
-                    <div class="clock__hours">00</div>
-                    <div class="clock__separator">:</div>
-                    <div class="clock__min">00</div>
-                    <div class="clock__separator">:</div>
-                    <div class="clock__sec">00</div>
+            <div class="main-content">
+                <h1 class="main-title">Countdown</h1>
+                <div class="clock">
+                    <div class="clock__container">
+                        <div class="clock__hours">00</div>
+                        <div class="clock__separator">:</div>
+                        <div class="clock__min">00</div>
+                        <div class="clock__separator">:</div>
+                        <div class="clock__sec">00</div>
+                    </div>
                 </div>
-            </div>
 
-            <div class="set-timer">
-                <form class="set-timer__form" method="get">
-                    <label class="set-timer__label" for="timeInput"
-                        >Enter hours:</label
-                    >
-                    <input
-                        class="set-timer__input"
-                        max="24"
-                        type="number"
-                        id="hours-timer-input"
-                        name="timeInput"
-                        placeholder="Hours"
-                        required
-                    />
-                    <label class="set-timer__label" for="timeInput"
-                        >Enter minutes:</label
-                    >
-                    <input
-                        class="set-timer__input"
-                        max="60"
-                        type="number"
-                        id="min-timer-input"
-                        name="timeInput"
-                        placeholder="Minutes"
-                        required
-                    />
-                    <label class="set-timer__label" for="timeInput"
-                        >Enter seconds:</label
-                    >
-                    <input
-                        class="set-timer__input"
-                        type="number"
-                        id="sec-timer-input"
-                        name="timeInput"
-                        placeholder="Seconds"
-                        required
-                    />
-                </form>
-            </div>
+                <div class="set-timer">
+                    <form class="set-timer__form" method="get">
+                        <label class="set-timer__label" for="timeInput"
+                            >Enter hours:</label
+                        >
+                        <input
+                            class="set-timer__input"
+                            max="24"
+                            type="number"
+                            id="hours-timer-input"
+                            name="timeInput"
+                            placeholder="Hours"
+                            required
+                        />
+                        <label class="set-timer__label" for="timeInput"
+                            >Enter minutes:</label
+                        >
+                        <input
+                            class="set-timer__input"
+                            max="60"
+                            type="number"
+                            id="min-timer-input"
+                            name="timeInput"
+                            placeholder="Minutes"
+                            required
+                        />
+                        <label class="set-timer__label" for="timeInput"
+                            >Enter seconds:</label
+                        >
+                        <input
+                            class="set-timer__input"
+                            type="number"
+                            id="sec-timer-input"
+                            name="timeInput"
+                            placeholder="Seconds"
+                            required
+                        />
+                    </form>
+                </div>
 
-            <div class="buttons__container">
-                <button class="button button__play-pause">Start</button>
+                <div class="buttons__container">
+                    <button class="button button__play-pause">Start</button>
 
-                <button class="button button__reset">Reset</button>
-            </div>
-            <div class="message__container">
-                <p class="message__text" id="message"></p>
+                    <button class="button button__reset">Reset</button>
+                </div>
+                <div class="message__container">
+                    <p class="message__text" id="message"></p>
+                </div>
             </div>
         </div>
         <footer class="footer">
