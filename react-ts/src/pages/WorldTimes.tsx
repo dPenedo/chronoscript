@@ -1,7 +1,8 @@
 import styles from './worldTimes.module.css';
 import Clock from '../components/Clock';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 // import { formatTime } from '../utils/timeUtils';
+
 export default function Ip() {
     const [userTime, setUserTime] = useState({
         hours: 0,
@@ -18,16 +19,16 @@ export default function Ip() {
         minutes: 0,
         seconds: 0,
     });
-    const [selectedHours, selectedMinutes, selectedSeconds] = [
-        selectedTime.hours,
-        selectedTime.minutes,
-        selectedTime.seconds,
-    ];
     const [selectedCity, setSelectedCity] = useState('');
 
     const [errorMessage, setErrorMessage] = useState('');
     const [timeZoneOffsetMinutes, setTimeZoneOffsetMinutes] = useState(9999);
 
+    const [selectedHours, selectedMinutes, selectedSeconds] = [
+        selectedTime.hours,
+        selectedTime.minutes,
+        selectedTime.seconds,
+    ];
     const toggleAccordion = () => {
         setOpenedListOfCities(!openedListOfCities);
     };
@@ -35,51 +36,53 @@ export default function Ip() {
     const [openedListOfCities, setOpenedListOfCities] = useState(false);
 
     const [listOfCities, setListOfCities] = useState<string[]>([]);
+
+    const wrapperRef = useRef<HTMLDivElement | null>(null);
+
+    // Set Time
+    useEffect(() => {
+        const updateTime = () => {
+            // First clock logic
+            const userLocationNow = new Date();
+            setUserTime({
+                hours: userLocationNow.getHours(),
+                minutes: userLocationNow.getMinutes(),
+                seconds: userLocationNow.getSeconds(),
+            });
+            // Second clock logic
+            const standardNow = new Date(
+                userLocationNow.getTime() +
+                    userLocationNow.getTimezoneOffset() * 60 * 1000,
+            );
+            const selectedNow = new Date(
+                standardNow.getTime() + timeZoneOffsetMinutes * 60 * 1000,
+            );
+
+            setSelectedTime({
+                hours: selectedNow.getHours(),
+                minutes: selectedNow.getMinutes(),
+                seconds: selectedNow.getSeconds(),
+            });
+        };
+
+        const intervalId = setInterval(updateTime, 1000);
+        return () => clearInterval(intervalId);
+    }, [timeZoneOffsetMinutes]); // Dependemos de timeZoneOffsetMinutes para actualizar el reloj
+
     const URLForListOfCities =
         'https://timeapi.io/api/timezone/availabletimezones';
     const URLForGettingTheTimeZone =
         'https://timeapi.io/api/timezone/zone?timeZone=';
 
-    const updateTime = () => {
-        // First clock logic
-        const userLocationNow = new Date();
-        const firstHours = userLocationNow.getHours();
-        const firstMinutes = userLocationNow.getMinutes();
-        const firstSeconds = userLocationNow.getSeconds();
-        setUserTime({
-            hours: firstHours,
-            minutes: firstMinutes,
-            seconds: firstSeconds,
-        });
-        // Second clock logic
-        const standardNow = new Date(
-            userLocationNow.getTime() +
-                userLocationNow.getTimezoneOffset() * 60 * 1000,
-        );
-        const selectedNow = new Date(
-            standardNow.getTime() + timeZoneOffsetMinutes * 60 * 1000,
-        );
-        // console.log('------------------------');
-        // console.log(`standard now: ${standardNow}`);
-        // console.log(`selected now: ${selectedNow}`);
-
-        const selectedHours = selectedNow.getHours();
-        const selectedMinutes = selectedNow.getMinutes();
-        const selectedSeconds = selectedNow.getSeconds();
-        setSelectedTime({
-            hours: selectedHours,
-            minutes: selectedMinutes,
-            seconds: selectedSeconds,
-        });
-    };
-
+    // Obtener el UTC de la ciudad seleccionada
     const getCitysUTC = () => {
-        fetch(`${URLForGettingTheTimeZone}${selectedCity}`)
+        fetch(`${URLForGettingTheTimeZone}${selectedCity.toLowerCase()}`)
             .then((response) => response.json())
             .then((data) => {
+                console.log('data ->' + data);
                 const utcOffsetSeconds = data.standardUtcOffset.seconds;
-                setTimeZoneOffsetMinutes(utcOffsetSeconds / 60);
-                console.log(`Offset en minutos: ${timeZoneOffsetMinutes}`);
+                setTimeZoneOffsetMinutes(utcOffsetSeconds / 60); // Establece el offset en minutos
+                console.log(`Offset en minutos: ${utcOffsetSeconds / 60}`);
             })
             .catch((error) => {
                 console.error('Error:', error);
@@ -88,14 +91,6 @@ export default function Ip() {
                 );
             });
     };
-
-    // Set Time
-    useEffect(() => {
-        const intervalId = setInterval(() => {
-            updateTime();
-        }, 1000);
-        return () => clearInterval(intervalId);
-    });
 
     // Set list of cities
     useEffect(() => {
@@ -108,6 +103,29 @@ export default function Ip() {
                 console.log('Error:' + error);
             });
     }, []);
+
+    // Actualizar el UTC de la ciudad cuando cambia la selección
+    useEffect(() => {
+        if (selectedCity) {
+            getCitysUTC();
+        }
+    }, [selectedCity]); // Se ejecuta cuando la ciudad seleccionada cambia
+
+    // Close accordion on click outside cities list
+    useEffect(() => {
+        const handleClickOutside = (event: MouseEvent | TouchEvent) => {
+            if (
+                wrapperRef.current &&
+                !wrapperRef.current.contains(event.target as Node)
+            ) {
+                setOpenedListOfCities(false);
+            }
+        };
+        document.addEventListener('mousedown', handleClickOutside);
+        return () => {
+            document.removeEventListener('mousedown', handleClickOutside);
+        };
+    });
 
     return (
         <div className="section">
@@ -136,6 +154,7 @@ export default function Ip() {
                 </button>
                 <div
                     className={`${styles.cities__content} ${openedListOfCities ? styles.cities__content_active : ''}`}
+                    ref={wrapperRef}
                 >
                     <form className={styles.cities__form} method="get">
                         <select
@@ -143,8 +162,8 @@ export default function Ip() {
                             name="cities"
                             id="cities"
                             onChange={(e) => {
-                                setSelectedCity(e.target.value);
-                                getCitysUTC();
+                                const cityFromSelect = e.target.value;
+                                setSelectedCity(cityFromSelect);
                             }}
                             size={8}
                         >
@@ -159,9 +178,8 @@ export default function Ip() {
                             ))}
                         </select>
                     </form>
-
-                    <div className={styles.error_message}>{errorMessage}</div>
                 </div>
+                <div className={styles.error_message}>{errorMessage}</div>
             </div>
         </div>
     );
