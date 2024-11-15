@@ -2,25 +2,28 @@ import styles from './worldTimes.module.css';
 import Clock from '../components/Clock';
 import { useEffect, useRef, useState } from 'react';
 import { fetchTimeZone, fetchListOfCities } from '../utils/apiUtils';
+import { calculateTimeFromTimeZone } from '../utils/timeUtils';
+import CitySelectorForm from '../components/CitySelectorForm';
+import Button from '../components/Button';
+
+interface Time {
+    hours: number;
+    minutes: number;
+    seconds: number;
+}
 
 export default function WorldTimes() {
-    // states for time
-    const [userTime, setUserTime] = useState({
+    const [userTime, setUserTime] = useState<Time>({
         hours: 0,
         minutes: 0,
         seconds: 0,
     });
-    const [selectedCity, setSelectedCity] = useState('');
-    const [userHours, userMinutes, userSeconds] = [
-        userTime.hours,
-        userTime.minutes,
-        userTime.seconds,
-    ];
-    const [selectedTime, setSelectedTime] = useState({
+    const [selectedTime, setSelectedTime] = useState<Time>({
         hours: 0,
         minutes: 0,
         seconds: 0,
     });
+    const [selectedCity, setSelectedCity] = useState<string>('');
     const [timeZoneOffsetMinutes, setTimeZoneOffsetMinutes] = useState(9999);
 
     // states for ui and list of cities
@@ -28,50 +31,33 @@ export default function WorldTimes() {
     const [listOfCities, setListOfCities] = useState<string[]>([]);
     const [errorMessage, setErrorMessage] = useState('');
     const wrapperRef = useRef<HTMLDivElement | null>(null);
-    const [selectedHours, selectedMinutes, selectedSeconds] = [
-        selectedTime.hours,
-        selectedTime.minutes,
-        selectedTime.seconds,
-    ];
-    const toggleAccordion = () => {
-        setOpenedListOfCities(!openedListOfCities);
-    };
 
-    const updateUserTime = () => {
+    const toggleAccordion = () => setOpenedListOfCities((prev) => !prev);
+
+    const updateTime = () => {
         const userLocationNow = new Date();
         setUserTime({
             hours: userLocationNow.getHours(),
             minutes: userLocationNow.getMinutes(),
             seconds: userLocationNow.getSeconds(),
         });
-    };
-    const updateSelectedTime = () => {
-        const userLocationNow = new Date();
-        const standardNow = new Date(
-            userLocationNow.getTime() +
-                userLocationNow.getTimezoneOffset() * 60 * 1000,
-        );
-        const selectedNow = new Date(
-            standardNow.getTime() + timeZoneOffsetMinutes * 60 * 1000,
-        );
 
+        const selectedTime = calculateTimeFromTimeZone(
+            userLocationNow,
+            timeZoneOffsetMinutes,
+        );
         setSelectedTime({
-            hours: selectedNow.getHours(),
-            minutes: selectedNow.getMinutes(),
-            seconds: selectedNow.getSeconds(),
+            hours: selectedTime.hours,
+            minutes: selectedTime.minutes,
+            seconds: selectedTime.seconds,
         });
     };
 
-    // Set Time
     useEffect(() => {
-        const intervalId = setInterval(() => {
-            updateUserTime();
-            updateSelectedTime();
-        }, 1000);
+        const intervalId = setInterval(updateTime, 1000);
         return () => clearInterval(intervalId);
-    }, [timeZoneOffsetMinutes]); // Dependemos de timeZoneOffsetMinutes para actualizar el reloj
+    }, [timeZoneOffsetMinutes]);
 
-    // Set list of cities
     useEffect(() => {
         const getCities = async () => {
             try {
@@ -85,7 +71,6 @@ export default function WorldTimes() {
         getCities();
     }, []);
 
-    // Actualizar el UTC de la ciudad cuando cambia la selección
     useEffect(() => {
         const getTimeZoneOffset = async () => {
             if (selectedCity) {
@@ -99,9 +84,8 @@ export default function WorldTimes() {
             }
         };
         getTimeZoneOffset();
-    }, [selectedCity]); // Se ejecuta cuando la ciudad seleccionada cambia
+    }, [selectedCity]);
 
-    // Close accordion on click outside cities list
     useEffect(() => {
         const handleClickOutside = (event: MouseEvent | TouchEvent) => {
             if (
@@ -112,10 +96,29 @@ export default function WorldTimes() {
             }
         };
         document.addEventListener('mousedown', handleClickOutside);
-        return () => {
+        return () =>
             document.removeEventListener('mousedown', handleClickOutside);
-        };
-    });
+    }, []);
+
+    const {
+        hours: userHours,
+        minutes: userMinutes,
+        seconds: userSeconds,
+    } = userTime;
+    const {
+        hours: selectedHours,
+        minutes: selectedMinutes,
+        seconds: selectedSeconds,
+    } = selectedTime;
+
+    const selectedClock =
+        timeZoneOffsetMinutes === 9999
+            ? { hours: 0, minutes: 0, seconds: 0 }
+            : {
+                  hours: selectedHours,
+                  minutes: selectedMinutes,
+                  seconds: selectedSeconds,
+              };
 
     return (
         <div className="section">
@@ -130,47 +133,26 @@ export default function WorldTimes() {
                 {selectedCity === '' ? "Selected City's Time" : selectedCity}
             </h1>
             <Clock
-                hours={timeZoneOffsetMinutes === 9999 ? 0 : selectedHours}
-                minutes={timeZoneOffsetMinutes === 9999 ? 0 : selectedMinutes}
-                seconds={timeZoneOffsetMinutes === 9999 ? 0 : selectedSeconds}
+                hours={selectedClock.hours}
+                minutes={selectedClock.minutes}
+                seconds={selectedClock.seconds}
                 showCentiseconds={false}
             />
             <div className={styles.cities}>
-                <button
-                    onClick={toggleAccordion}
-                    className={styles.cities__button}
-                >
-                    Select a city ⬇
-                </button>
+                <Button onClick={toggleAccordion}>Select a city ⬇</Button>
                 <div
                     className={`${styles.cities__content} ${openedListOfCities ? styles.cities__content_active : ''}`}
                     ref={wrapperRef}
                 >
-                    <form className={styles.cities__form} method="get">
-                        <select
-                            className={styles.cities__select}
-                            name="cities"
-                            id="cities"
-                            onChange={(e) => {
-                                const cityFromSelect = e.target.value;
-                                setSelectedCity(cityFromSelect);
-                            }}
-                            onClick={toggleAccordion}
-                            size={8}
-                        >
-                            {listOfCities.map((city: string) => (
-                                <option
-                                    className={styles.cities__option}
-                                    key={city}
-                                    value={city}
-                                >
-                                    {city}
-                                </option>
-                            ))}
-                        </select>
-                    </form>
+                    <CitySelectorForm
+                        listOfCities={listOfCities}
+                        onCitySelect={setSelectedCity}
+                        onToggleAccordion={toggleAccordion}
+                    />
                 </div>
-                <div className={styles.error_message}>{errorMessage}</div>
+                {errorMessage && (
+                    <div className={styles.error_message}>{errorMessage}</div>
+                )}
             </div>
         </div>
     );

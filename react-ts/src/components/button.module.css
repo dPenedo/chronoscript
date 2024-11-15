@@ -1,5 +1,6 @@
 .button {
-    background-color: var(--blue);
+    background-color: var(--yellow);
+    align-self: center;
     color: var(--bg);
     border-color: var(--purple);
     font-family: 'Kode Mono';
@@ -8,6 +9,7 @@
     width: 8rem;
     border-radius: 5px;
     padding: 0.5em;
+    width: 12rem;
     transition:
         background-color 0.3s ease,
         color 0.3s ease;

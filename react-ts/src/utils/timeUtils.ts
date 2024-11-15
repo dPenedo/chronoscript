@@ -11,3 +11,22 @@ export const calculateTimeFromCentiseconds = (totalCentiseconds: number) => {
 
     return { hours, minutes, seconds, centiseconds };
 };
+
+export const calculateTimeFromTimeZone = (
+    userLocationNow: Date,
+    timeZoneOffsetMinutes: number,
+) => {
+    const standardNow = new Date(
+        userLocationNow.getTime() +
+            userLocationNow.getTimezoneOffset() * 60 * 1000,
+    );
+    const selectedNow = new Date(
+        standardNow.getTime() + timeZoneOffsetMinutes * 60 * 1000,
+    );
+
+    return {
+        hours: selectedNow.getHours(),
+        minutes: selectedNow.getMinutes(),
+        seconds: selectedNow.getSeconds(),
+    };
+};
