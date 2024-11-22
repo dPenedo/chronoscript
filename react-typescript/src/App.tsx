@@ -8,17 +8,16 @@ import './App.css';
 
 export default function App() {
     return (
-            <>
+        <>
             <Header />
             <main className="main-content">
-
-            <Routes>
-                <Route path="/" element={<Home />} />
-                <Route path="/countdown" element={<Countdown />} />
-                <Route path="/world-times" element={<WorldTimes />} />
-            </Routes>
+                <Routes>
+                    <Route path="/" element={<Home />} />
+                    <Route path="/countdown" element={<Countdown />} />
+                    <Route path="/world-times" element={<WorldTimes />} />
+                </Routes>
             </main>
             <Footer />
-            </>
+        </>
     );
 }

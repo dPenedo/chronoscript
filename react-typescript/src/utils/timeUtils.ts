@@ -23,10 +23,24 @@ export const calculateTimeFromTimeZone = (
     const selectedNow = new Date(
         standardNow.getTime() + timeZoneOffsetMinutes * 60 * 1000,
     );
-
     return {
         hours: selectedNow.getHours(),
         minutes: selectedNow.getMinutes(),
         seconds: selectedNow.getSeconds(),
     };
+};
+
+export const updateUserTime = () => {
+    const userLocationNow = new Date();
+    return {
+        hours: userLocationNow.getHours(),
+        minutes: userLocationNow.getMinutes(),
+        seconds: userLocationNow.getSeconds(),
+    };
+};
+export const updateSelectedTime = (
+    userLocationNow: Date,
+    timeZoneOffsetMinutes: number,
+) => {
+    return calculateTimeFromTimeZone(userLocationNow, timeZoneOffsetMinutes);
 };

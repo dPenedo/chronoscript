@@ -2,9 +2,9 @@ import styles from './worldTimes.module.css';
 import Clock from '../components/Clock';
 import { useEffect, useRef, useState } from 'react';
 import { fetchTimeZone, fetchListOfCities } from '../utils/apiUtils';
-import { calculateTimeFromTimeZone } from '../utils/timeUtils';
 import CitySelectorForm from '../components/CitySelectorForm';
-import Button from '../components/Button';
+import { updateUserTime, updateSelectedTime } from '../utils/timeUtils';
+import AccordionButton from '../components/AccordionButton';
 
 interface Time {
     hours: number;
@@ -34,27 +34,14 @@ export default function WorldTimes() {
 
     const toggleAccordion = () => setOpenedListOfCities((prev) => !prev);
 
-    const updateTime = () => {
-        const userLocationNow = new Date();
-        setUserTime({
-            hours: userLocationNow.getHours(),
-            minutes: userLocationNow.getMinutes(),
-            seconds: userLocationNow.getSeconds(),
-        });
-
-        const selectedTime = calculateTimeFromTimeZone(
-            userLocationNow,
-            timeZoneOffsetMinutes,
-        );
-        setSelectedTime({
-            hours: selectedTime.hours,
-            minutes: selectedTime.minutes,
-            seconds: selectedTime.seconds,
-        });
-    };
-
     useEffect(() => {
-        const intervalId = setInterval(updateTime, 1000);
+        const intervalId = setInterval(() => {
+            const userLocationNow = new Date();
+            setUserTime(updateUserTime());
+            setSelectedTime(
+                updateSelectedTime(userLocationNow, timeZoneOffsetMinutes),
+            );
+        }, 1000);
         return () => clearInterval(intervalId);
     }, [timeZoneOffsetMinutes]);
 
@@ -63,6 +50,7 @@ export default function WorldTimes() {
             try {
                 const cities = await fetchListOfCities();
                 setListOfCities(cities);
+
             } catch (error) {
                 setErrorMessage('Error loading the list of cities');
                 console.error(error);
@@ -115,10 +103,10 @@ export default function WorldTimes() {
         timeZoneOffsetMinutes === 9999
             ? { hours: 0, minutes: 0, seconds: 0 }
             : {
-                  hours: selectedHours,
-                  minutes: selectedMinutes,
-                  seconds: selectedSeconds,
-              };
+                hours: selectedHours,
+                minutes: selectedMinutes,
+                seconds: selectedSeconds,
+            };
 
     return (
         <div className="section">
@@ -139,7 +127,7 @@ export default function WorldTimes() {
                 showCentiseconds={false}
             />
             <div className={styles.cities}>
-                <Button onClick={toggleAccordion}>Select a city ⬇</Button>
+                <AccordionButton onClick={toggleAccordion} />
                 <div
                     className={`${styles.cities__content} ${openedListOfCities ? styles.cities__content_active : ''}`}
                     ref={wrapperRef}
