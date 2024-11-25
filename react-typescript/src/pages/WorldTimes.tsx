@@ -30,7 +30,8 @@ export default function WorldTimes() {
     const [openedListOfCities, setOpenedListOfCities] = useState(false);
     const [listOfCities, setListOfCities] = useState<string[]>([]);
     const [errorMessage, setErrorMessage] = useState('');
-    const wrapperRef = useRef<HTMLDivElement | null>(null);
+    // WARN: type null borrado
+    const wrapperRef = useRef<null | HTMLDivElement>(null);
 
     const toggleAccordion = () => setOpenedListOfCities((prev) => !prev);
 
@@ -50,7 +51,6 @@ export default function WorldTimes() {
             try {
                 const cities = await fetchListOfCities();
                 setListOfCities(cities);
-
             } catch (error) {
                 setErrorMessage('Error loading the list of cities');
                 console.error(error);
@@ -103,10 +103,10 @@ export default function WorldTimes() {
         timeZoneOffsetMinutes === 9999
             ? { hours: 0, minutes: 0, seconds: 0 }
             : {
-                hours: selectedHours,
-                minutes: selectedMinutes,
-                seconds: selectedSeconds,
-            };
+                  hours: selectedHours,
+                  minutes: selectedMinutes,
+                  seconds: selectedSeconds,
+              };
 
     return (
         <div className="section">
