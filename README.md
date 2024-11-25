@@ -3,7 +3,7 @@
 ChronoScript is a web application made two times:
 
 1. The **Vanilla JavaScript, HTML, and CSS**. It only has external libraries for testing: `Jest`.
-2. The **React + TypeScript** built with **vite**. it also has external libraries such as `React-router-dom` and `Jest` for testing.
+2. The **React + TypeScript** built with **vite**. it also has external libraries such as `React-router-dom` and `Vitest` for testing.
 
 Both of them include three sections:
 

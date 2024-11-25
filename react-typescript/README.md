@@ -1,50 +1,27 @@
-# React + TypeScript + Vite
+# ChronoScript - React + TypeScript + Vite
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## React Version version
+ChronoScript-React is a stopwatch, countdown timer, and world clock application built with **Vite, TypeScript, and CSS modues**. It features a modern design inspired by the classic [Nord theme](https://www.nordtheme.com/). The application tracks hours, minutes, seconds, and milliseconds. This project is part of the [ChronoScript project](https://github.com/dpenedo/chronoscript), which also includes a version built with **Vanilla JavaScript**. In this version, testing is done with **Vitest**, in the *Vanilla* one, testin is done with *Jest*.  
 
-Currently, two official plugins are available:
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
 
-## Expanding the ESLint configuration
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
 
-- Configure the top-level `parserOptions` property like this:
+## Stopwatch Usage
+Using the stopwatch is straightforward:
+- The "Start" button has three modes:
+    1. "Start" to begin the stopwatch
+    2. "Stop" to halt the stopwatch
+    3. "Pause" to temporarily pause the stopwatch
+- The "Reset" button resets the stopwatch to zero.
 
-```js
-export default tseslint.config({
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
-```
+## Countdown Timer Usage
+Using the countdown timer is similar:
+- The "Start" button has three modes:
+    1. "Start" to begin the countdown
+    2. "Stop" to halt the countdown
+    3. "Pause" to temporarily pause the countdown
+- The "Reset" button resets the countdown to zero.
 
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
-
-```js
-// eslint.config.js
-import react from 'eslint-plugin-react'
-
-export default tseslint.config({
-  // Set the react version
-  settings: { react: { version: '18.3' } },
-  plugins: {
-    // Add the react plugin
-    react,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended rules
-    ...react.configs.recommended.rules,
-    ...react.configs['jsx-runtime'].rules,
-  },
-})
-```
+## World Clock Usage
+The world clock automatically detects your city’s timezone. You can select any city from the `Select a city` dropdown menu to view the current time in that location.
